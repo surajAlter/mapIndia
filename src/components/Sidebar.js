@@ -1,15 +1,68 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+  const sidebarSections = [
+    {
+      title: "Maps of India",
+      links: [
+        { name: "Map of India", path: "/map-of-india" },
+        { name: "Physical Map of India", path: "/physical-map" },
+        { name: "Outline Map of India", path: "/outline-map" },
+        { name: "More...", path: "/moreinfopage" },
+      ],
+    },
+    {
+      title: "India Maps And Views",
+      links: [
+        { name: "India Geography", path: "/india-geography" },
+        { name: "History of India", path: "/history" },
+        { name: "India Census Maps", path: "/census-maps" },
+        { name: "Business and Economy", path: "/business-economy" },
+        { name: "India Culture", path: "/india-culture" },
+        { name: "More...", path: "/india-maps-and-views" },
+      ],
+    },
+    {
+      title: "Transport Network In India",
+      links: [
+        { name: "Road Map of India", path: "/road-map" },
+        { name: "India Rail Network", path: "/rail-network" },
+        { name: "Air Network in India", path: "/air-network" },
+        { name: "Ports in India & waterways", path: "/ports-waterways" },
+        { name: "More...", path: "/transport-network" },
+      ],
+    },
+    {
+      title: "India Travel",
+      links: [
+        { name: "Hotels in India", path: "/hotels" },
+        { name: "Temples in India", path: "/temples" },
+        { name: "Hill Stations", path: "/hill-stations" },
+        { name: "More...", path: "/india-travel" },
+      ],
+    },
+  ];
+
   return (
     <aside className="w-full md:w-1/4 bg-white p-4 shadow-md">
       <h2 className="text-lg font-semibold text-blue-600">Linkages</h2>
-      <ul className="mt-2 text-sm space-y-2">
-        <li><a href="#" className="text-gray-700 hover:text-blue-600">Map of India</a></li>
-        <li><a href="#" className="text-gray-700 hover:text-blue-600">Physical Map of India</a></li>
-        <li><a href="#" className="text-gray-700 hover:text-blue-600">Outline Map of India</a></li>
-        <li><a href="#" className="text-gray-700 hover:text-blue-600">More...</a></li>
-      </ul>
+      {sidebarSections.map((section, index) => (
+        <div key={index} className="mt-4">
+          <h3 className="text-md font-semibold text-white bg-blue-600 px-2 py-1">
+            {section.title}
+          </h3>
+          <ul className="mt-2 text-sm space-y-2">
+            {section.links.map((link, i) => (
+              <li key={i}>
+                <Link to={link.path} className="text-gray-700 hover:text-blue-600">
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </aside>
   );
 };

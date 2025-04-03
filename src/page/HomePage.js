@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import WelcomeSection from "../components/WelcomeSection";
 import SponsorSection from "../components/SponsorSections";
@@ -8,7 +7,6 @@ import ClientFeedback from "../components/ClientFeedback";
 const HomePage = () => {
   return (
     <div>
-      <Navbar />
       <h1 className="text-center mt-10 text-3xl font-bold">
         Welcome to Maps of India
       </h1>
