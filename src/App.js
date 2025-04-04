@@ -1,16 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./page/HomePage";
-import Navbar from "./components/Navbar";
-import  MoreInfoPage from "./components/MoreInfoPage"; // Import the MoreInfoPage component
+import Navbar from "./components/Navbar"; 
+import MoreInfoPage from "./components/MoreInfoMapPage"; 
+import StatesPage from "./page/StatePages"; 
+import MapofIndiaPage from "./components/MapofIndiaPage"; // Correct import
+import Utility from "./page/UtilityMorePage"; // Correct import
 
 function App() {
   return (
     <Router>
-      <Navbar /> {/* Moved outside <Routes> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/map-of-india" element={<HomePage />} />
+        
+        {/* Fixing Map of India Route */}
+        <Route path="/map-of-india" element={<MapofIndiaPage />} />
+
         <Route path="/physical-map" element={<HomePage />} />
         <Route path="/outline-map" element={<HomePage />} />
         <Route path="/india-geography" element={<HomePage />} />
@@ -25,12 +31,19 @@ function App() {
         <Route path="/hotels" element={<HomePage />} />
         <Route path="/temples" element={<HomePage />} />
         <Route path="/hill-stations" element={<HomePage />} />
-        <Route path="/maps-of-india" element={<HomePage />} />
+        
+        {/* Fixing Maps of India Route */}
+        <Route path="/maps-of-india" element={<MapofIndiaPage />} />
+
         <Route path="/india-maps-and-views" element={<HomePage />} />
         <Route path="/transport-network" element={<HomePage />} />
         <Route path="/india-travel" element={<HomePage />} />
+        
         <Route path="/moreinfopage" element={<MoreInfoPage title="Maps of India - More Information" />} />
+        <Route path="/states" element={<StatesPage />} />
+        <Route path="/utilities" element={<Utility />} />
 
+        
       </Routes>
     </Router>
   );

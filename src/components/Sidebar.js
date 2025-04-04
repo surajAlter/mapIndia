@@ -41,7 +41,68 @@ const Sidebar = () => {
         { name: "Hill Stations", path: "/hill-stations" },
         { name: "More...", path: "/india-travel" },
       ],
+      
     },
+    {
+      title: "India States & Union Territories",
+      links: [
+        { name: "Kerala", path: "/kerala" },
+        { name: "Goa", path: "/goa" },
+        { name: "Gujarat", path: "/gujarat" },
+        { name: "Rajasthan", path: "/rajasthan" },
+        { name: "More...", path: "/states-ut" },
+      ],
+    },
+    {
+      title: "Cities Of India",
+      links: [
+        { name: "Top 10 Cities of India", path: "/top-cities" },
+        { name: "Bangalore", path: "/bangalore" },
+        { name: "Mumbai", path: "/mumbai" },
+        { name: "Chennai", path: "/chennai" },
+        { name: "More...", path: "/cities" },
+      ],
+    },
+    {
+      title: "Driving Direction Maps",
+      links: [
+        { name: "National Highways", path: "/national-highways" },
+        { name: "Intra City Maps", path: "/intra-city-maps" },
+        { name: "More...", path: "/driving-maps" },
+      ],
+    },
+    {
+      title: "World Map",
+      links: [{ name: "World Map", path: "/world-map" }],
+    },
+    {
+      title: "Product & Services",
+      links: [
+        { name: "India Maps Store", path: "/maps-store" },
+        { name: "Custom Mapping", path: "/custom-mapping" },
+        { name: "Location Locator Solutions", path: "/location-solutions" },
+        { name: "More...", path: "/products-services" },
+      ],
+    },
+    {
+      title: "Our Channels",
+      links: [
+        { name: "Current Events", path: "/current-events" },
+        { name: "India Automobiles", path: "/india-automobiles" },
+        { name: "Live Cricket Score", path: "/live-cricket-score" },
+        { name: "India News", path: "/india-news" },
+      ],
+    },
+    {
+      title: "Indien Karten",
+      links: [
+        { name: "Karten von Goa", path: "/karten-goa" },
+        { name: "Landkarten von Kerala", path: "/landkarten-kerala" },
+        { name: "Landkarten von Rajasthan", path: "/landkarten-rajasthan" },
+        { name: "More...", path: "/indien-karten" },
+      ],
+    },
+    
   ];
 
   return (
