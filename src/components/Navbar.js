@@ -57,7 +57,18 @@ const Navbar = () => {
   };
 
   const dropdownItems = {
-    states: ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", { text: "More...", path: "/states" }],
+    states: [
+      { text: "Andhra Pradesh", path: "/states/andhra-pradesh" },
+      { text: "Arunachal Pradesh", path: "/states/arunachal-pradesh" },
+      { text: "Assam", path: "/states/assam" },
+      { text: "Bihar", path: "/states/bihar" },
+      { text: "Chhattisgarh", path: "/states/chhattisgarh" },
+      { text: "Goa", path: "/states/goa" },
+      { text: "Gujarat", path: "/states/gujarat" },
+      { text: "Haryana", path: "/states/haryana" },
+      { text: "More...", path: "/states" },
+    ],
+    
     cities: ["Delhi", "Mumbai", "Kolkata", "Chennai", "Bangalore", { text: "More...", path: "/cities" }],
     maps: ["Political Map", "Physical Map", "Outline Map", "Railway Map", "Road Map", { text: "More...", path: "/maps" }],
     indiaTravel: ["Hotels in India", "Tourist Places in India", "Hill Stations", "Beaches in India", "Religious Places in India", { text: "More...", path: "/travel" }],
