@@ -30,6 +30,8 @@ import Manipur from "./components/States/Manipur"; // Correct import
 import Meghalaya from "./components/States/Meghalaya"; // Correct import
 import Mizoram from "./components/States/Mizoram"; // Correct import
 import Nagaland from "./components/States/Nagaland"; // Correct import
+import Odisha from "./components/States/Odisha"; // Correct import
+import PuducherryPage from "./components/States/Puducherry";
 
 
 function App() {
@@ -91,6 +93,8 @@ function App() {
         <Route path="/states/meghalaya" element={<Meghalaya />} />
         <Route path="/states/mizoram" element={<Mizoram />} />
         <Route path="/states/nagaland" element={<Nagaland />} />
+        <Route path="/states/odisha" element={<Odisha />} />
+        <Route path="/states/puducherry" element={<PuducherryPage />} />
 
         {/* Add other state routes here */}
 
