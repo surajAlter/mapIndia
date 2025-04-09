@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 
-const Sikkim = () => {
-	const districts = [
-		"East Sikkim",
-		"West Sikkim",
-		"North Sikkim",
-		"South Sikkim",
-	];
+const Uttarakhand = () => {
+	const districts = ["Dehradun", "Nainital", "Haridwar", "Chamoli", "Almora"];
 
 	const districtInfo = {
-		"East Sikkim": `Home to Gangtok, the state capital, this district is known for its bustling markets, monasteries like Rumtek, and cultural heritage.`,
-		"West Sikkim": `Known for its serene landscapes and secluded valleys, offering a quieter glimpse into Sikkim's natural beauty.`,
-		"North Sikkim": `A remote region famous for high-altitude treks, stunning Himalayan vistas, and landmarks like Gurudongmar Lake.`,
-		"South Sikkim": `Characterized by lush valleys and diverse communities, with a pleasant climate and rich local traditions.`,
+		Dehradun: `The capital region noted for its pleasant climate, educational institutions, and gateways to hill stations.`,
+		Nainital: `A famed hill station recognized for its shimmering lake and colonial charm.`,
+		Haridwar: `One of India's holiest cities where pilgrims flock to the sacred Ganges.`,
+		Chamoli: `Offers rugged Himalayan landscapes, adventure treks, and spiritual sites.`,
+		Almora: `Known for its rich cultural legacy, panoramic mountain views, and serene environment.`,
 	};
 
-	const [selectedDistrict, setSelectedDistrict] = useState("East Sikkim");
+	const [selectedDistrict, setSelectedDistrict] = useState("Dehradun");
 
 	return (
 		<div className="flex flex-col md:flex-row px-4 sm:px-10 md:px-20 py-10 text-[#333] gap-10">
@@ -46,22 +42,21 @@ const Sikkim = () => {
 				{/* Image */}
 				<div className="w-full h-64 sm:h-96">
 					<img
-						src={require("../../assets/State/Sikkim/Sikkim.jpg")}
-						alt="Sikkim"
-						className="w-full h-full object-cover rounded-lg shadow-md"
+						src={require("../../assets/State/Uttarakhand/Uttarakhand.jpg")}
+						alt="Uttarakhand"
+						className="w-full h-full object-contain rounded-lg shadow-md"
 					/>
 				</div>
 
 				{/* State Info Section */}
 				<section>
 					<h1 className="text-4xl font-bold text-[#2E3A59] mb-4">
-						Sikkim
+						Uttarakhand
 					</h1>
 					<p className="text-lg leading-7">
-						Nestled in the Himalayas, Sikkim is known for its
-						breathtaking mountain landscapes, vibrant Buddhist
-						culture, and pristine natural beauty. This small state
-						offers a unique blend of adventure and serenity.
+						Nestled in the Himalayas, Uttarakhand is renowned for
+						its spiritual centers, breath­taking landscapes, and
+						adventure activities amidst pristine nature.
 					</p>
 				</section>
 
@@ -72,23 +67,16 @@ const Sikkim = () => {
 					</h2>
 					<ul className="list-disc list-inside space-y-1">
 						<li>
-							<strong>Capital:</strong> Gangtok
+							<strong>Capital:</strong> Dehradun
 						</li>
 						<li>
-							<strong>Area:</strong> 7,096 sq km
+							<strong>Area:</strong> 53,483 sq km
 						</li>
 						<li>
-							<strong>Population:</strong> ~610,000 (2011 Census)
+							<strong>Population:</strong> ~10 million
 						</li>
 						<li>
-							<strong>Official Language:</strong> English, Nepali,
-							Bhutia, Lepcha
-						</li>
-						<li>
-							<strong>State Animal:</strong> Red Panda
-						</li>
-						<li>
-							<strong>State Bird:</strong> Blood Pheasant
+							<strong>Official Language:</strong> Hindi, English
 						</li>
 					</ul>
 				</section>
@@ -99,15 +87,13 @@ const Sikkim = () => {
 						Tourism
 					</h2>
 					<p className="text-lg leading-7 mb-2">
-						Sikkim offers adventure and culture with attractions
-						like:
+						Uttarakhand is famed for its pilgrimage sites, hill
+						stations, and adventure tourism.
 					</p>
 					<ul className="list-disc list-inside space-y-1">
-						<li>Rumtek Monastery & other Buddhist sites</li>
-						<li>Majestic views of Kanchenjunga</li>
-						<li>Tsomgo Lake & Gurudongmar Lake</li>
-						<li>Hot springs at Yumthang Valley</li>
-						<li>Scenic mountain treks</li>
+						<li>Har Ki Pauri in Haridwar</li>
+						<li>Nainital Lake</li>
+						<li>Jim Corbett National Park</li>
 					</ul>
 				</section>
 
@@ -117,10 +103,9 @@ const Sikkim = () => {
 						Geography & Climate
 					</h2>
 					<p className="text-lg leading-7">
-						Sikkim’s terrain ranges from subtropical valleys to
-						alpine heights with climate varying from mild summers in
-						the lower regions to harsh winters in the high
-						altitudes.
+						From the foothills to alpine peaks, Uttarakhand
+						experiences a range of climates—from subtropical in the
+						lower regions to frigid in the high mountains.
 					</p>
 				</section>
 
@@ -133,13 +118,14 @@ const Sikkim = () => {
 						<div>
 							<h3 className="font-semibold text-lg">Air</h3>
 							<ul className="list-disc list-inside">
-								<li>Nearest Airport: Bagdogra</li>
+								<li>Jolly Grant Airport, Dehradun</li>
 							</ul>
 						</div>
 						<div>
 							<h3 className="font-semibold text-lg">Rail</h3>
 							<ul className="list-disc list-inside">
-								<li>Nearest Railway Station: New Jalpaiguri</li>
+								<li>Dehradun Railway Station</li>
+								<li>Regional routes across hill regions</li>
 							</ul>
 						</div>
 					</div>
@@ -151,9 +137,11 @@ const Sikkim = () => {
 						Government
 					</h2>
 					<ul className="list-disc list-inside">
-						<li>Unicameral Legislature (32 seats)</li>
-						<li>Divisions: 4 districts</li>
-						<li>High Court: Sikkim High Court (Gangtok)</li>
+						<li>Unicameral Legislature</li>
+						<li>
+							Divided into multiple districts for regional
+							administration
+						</li>
 					</ul>
 				</section>
 			</div>
@@ -169,32 +157,39 @@ const Sikkim = () => {
 				<div className="mt-6">
 					<h3 className="text-lg font-semibold mb-2">Key Features</h3>
 					<ul className="list-disc list-inside space-y-1 text-gray-600">
-						{selectedDistrict === "East Sikkim" && (
+						{selectedDistrict === "Dehradun" && (
 							<>
-								<li>Gangtok City</li>
-								<li>Rumtek Monastery</li>
-								<li>Enchey Monastery</li>
+								<li>Educational Hubs</li>
+								<li>Scenic Valleys</li>
+								<li>Gateway to Hill Stations</li>
 							</>
 						)}
-						{selectedDistrict === "North Sikkim" && (
+						{selectedDistrict === "Nainital" && (
 							<>
-								<li>Gurudongmar Lake</li>
-								<li>High-altitude Treks</li>
-								<li>Scenic Himalayan views</li>
+								<li>Lake District Charm</li>
+								<li>Colonial Architecture</li>
+								<li>Hiking Trails</li>
 							</>
 						)}
-						{selectedDistrict === "West Sikkim" && (
+						{selectedDistrict === "Haridwar" && (
 							<>
-								<li>Serene Valleys</li>
-								<li>Rural charm</li>
-								<li>Natural landscapes</li>
+								<li>Spiritual Pilgrimage</li>
+								<li>Ganga Aarti</li>
+								<li>Cultural Heritage</li>
 							</>
 						)}
-						{selectedDistrict === "South Sikkim" && (
+						{selectedDistrict === "Chamoli" && (
 							<>
-								<li>Lush Terrains</li>
-								<li>Diverse Cultural Heritage</li>
-								<li>Milder Climate</li>
+								<li>Himalayan Treks</li>
+								<li>Adventure Sports</li>
+								<li>Pristine Nature</li>
+							</>
+						)}
+						{selectedDistrict === "Almora" && (
+							<>
+								<li>Local Art & Culture</li>
+								<li>Mountain Views</li>
+								<li>Peaceful Countryside</li>
 							</>
 						)}
 					</ul>
@@ -204,4 +199,4 @@ const Sikkim = () => {
 	);
 };
 
-export default Sikkim;
+export default Uttarakhand;
