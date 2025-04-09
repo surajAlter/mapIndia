@@ -64,16 +64,17 @@ const Navbar = () => {
 
 	const dropdownItems = {
 		states: [
-			"Andhra Pradesh",
-			"Arunachal Pradesh",
-			"Assam",
-			"Bihar",
-			"Chhattisgarh",
-			"Goa",
-			"Gujarat",
-			"Haryana",
+			{ text: "Andhra Pradesh", path: "/states/andhra-pradesh" },
+			{ text: "Arunachal Pradesh", path: "/states/arunachal-pradesh" },
+			{ text: "Assam", path: "/states/assam" },
+			{ text: "Bihar", path: "/states/bihar" },
+			{ text: "Chhattisgarh", path: "/states/chhattisgarh" },
+			{ text: "Goa", path: "/states/goa" },
+			{ text: "Gujarat", path: "/states/gujarat" },
+			{ text: "Haryana", path: "/states/haryana" },
 			{ text: "More...", path: "/states" },
 		],
+
 		cities: [
 			"Delhi",
 			"Mumbai",
