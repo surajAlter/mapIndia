@@ -40,7 +40,7 @@ const statesData = [
     { text: "Lakshadweep", description: "Beautiful coral islands.", path: "/states/lakshadweep" },
     { text: "Delhi", description: "Capital of India with historic monuments.", path: "/states/delhi" },
     { text: "Puducherry", description: "French-inspired coastal town.", path: "/states/puducherry" },
-    { text: "Ladakh", description: "French-inspired coastal town.", path: "/states/Ladakh" },
+    { text: "Ladakh", description: "French-inspired coastal town.", path: "/states/ladakh" },
 ];
 
 const StatesPage = () => {

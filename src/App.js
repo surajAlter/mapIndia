@@ -32,6 +32,7 @@ import Mizoram from "./components/States/Mizoram"; // Correct import
 import Nagaland from "./components/States/Nagaland"; // Correct import
 import Odisha from "./components/States/Odisha"; // Correct import
 import PuducherryPage from "./components/States/Puducherry";
+import Ladakh from "./components/States/Ladakh";
 
 
 function App() {
@@ -95,6 +96,7 @@ function App() {
         <Route path="/states/nagaland" element={<Nagaland />} />
         <Route path="/states/odisha" element={<Odisha />} />
         <Route path="/states/puducherry" element={<PuducherryPage />} />
+        <Route path="/states/ladakh" element={<Ladakh />} />
 
         {/* Add other state routes here */}
 
