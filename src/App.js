@@ -50,6 +50,7 @@ import UttarPradesh from "./components/States/UttarPradesh";
 import Uttarakhand from "./components/States/Uttarakhand";
 import WestBengal from "./components/States/WestBengal";
 import Ladakh from "./components/States/Ladakh";
+import JammuKashmir from "./components/States/JammuKashmir";
 
 function App() {
 	return (
@@ -124,6 +125,10 @@ function App() {
 				<Route
 					path="/states/himachal-pradesh"
 					element={<HimachalPradesh />}
+				/>
+				<Route
+					path="/states/jammu-kashmir"
+					element={<JammuKashmir />}
 				/>
 				<Route path="/states/jharkhand" element={<Jharkhand />} />
 				<Route path="/states/karnataka" element={<Karnataka />} />
