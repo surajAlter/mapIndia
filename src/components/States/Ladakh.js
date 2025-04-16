@@ -1,30 +1,24 @@
 import React, { useState } from "react";
+import ladakhMap from "../../assets/State/Ladakh/ladakh.jpg"; // Replace with actual Ladakh map path
+
+const districts = ["Leh", "Kargil"];
 
 const Ladakh = () => {
-	const districts = ["Leh", "Kargil"];
-
-	const districtInfo = {
-		Leh: `The district and administrative center known for its Buddhist monasteries, rugged mountains, and high-altitude landscapes.`,
-		Kargil: `A historic district famed for its dramatic mountain scenery, strategic significance, and cultural heritage.`,
-	};
-
 	const [selectedDistrict, setSelectedDistrict] = useState("Leh");
 
 	return (
-		<div className="flex flex-col md:flex-row px-4 sm:px-10 md:px-20 py-10 text-[#333] gap-10">
-			{/* Left Sidebar */}
-			<div className="md:w-1/4 w-full bg-gray-100 rounded-lg shadow-md p-4 h-fit sticky top-10">
-				<h2 className="text-xl font-bold mb-4 text-[#2E3A59]">
-					Districts
-				</h2>
+		<div className="flex max-w-6xl mx-auto p-6">
+			{/* Sidebar */}
+			<aside className="w-1/4 pr-6">
+				<h2 className="text-xl font-semibold mb-4">Districts</h2>
 				<ul className="space-y-2">
 					{districts.map((district) => (
 						<li
 							key={district}
-							className={`cursor-pointer px-3 py-2 rounded-md ${
+							className={`cursor-pointer px-3 py-2 rounded-lg hover:bg-blue-100 ${
 								selectedDistrict === district
-									? "bg-amber-600 text-white font-semibold"
-									: "hover:bg-amber-100"
+									? "bg-blue-200 font-semibold"
+									: ""
 							}`}
 							onClick={() => setSelectedDistrict(district)}
 						>
@@ -32,138 +26,81 @@ const Ladakh = () => {
 						</li>
 					))}
 				</ul>
-			</div>
+			</aside>
 
-			{/* Center Content */}
-			<div className="md:w-2/4 w-full space-y-10">
-				{/* State Image */}
-				<div className="w-full h-64 sm:h-96">
-					<img
-						src={require("../../assets/State/Ladakh/Ladakh.jpg")}
-						alt="Ladakh"
-						className="w-full h-full object-contain rounded-lg shadow-md"
-					/>
-				</div>
-				{/* State Info */}
-				<section>
-					<h1 className="text-4xl font-bold text-[#2E3A59] mb-4">
-						Ladakh
-					</h1>
-					<p className="text-lg leading-7">
-						Ladakh, located in the northernmost region, is
-						celebrated for its stark high-altitude desert
-						landscapes, ancient Buddhist culture, and adventure
-						opportunities.
-					</p>
-				</section>
-				{/* Quick Facts */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Quick Facts
-					</h2>
-					<ul className="list-disc list-inside space-y-1">
-						<li>
-							<strong>Capital:</strong> Leh
-						</li>
-						<li>
-							<strong>Area:</strong> 59,146 sq km
-						</li>
-						<li>
-							<strong>Population:</strong> ~274,000
-						</li>
-						<li>
-							<strong>Official Languages:</strong> Ladakhi, Urdu,
-							English
-						</li>
-					</ul>
-				</section>
-				{/* Tourism */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Tourism
-					</h2>
-					<p className="text-lg leading-7 mb-2">
-						From ancient monasteries and breathtaking mountain
-						passes to thrilling adventure treks, Ladakh offers a
-						unique travel experience.
-					</p>
-					<ul className="list-disc list-inside space-y-1">
-						<li>Pangong Lake</li>
-						<li>Nubra Valley</li>
-						<li>Magnetic Hill</li>
-					</ul>
-				</section>
-				{/* Geography & Climate */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Geography & Climate
-					</h2>
-					<p className="text-lg leading-7">
-						Characterized by rugged terrain and sparse vegetation,
-						Ladakh's arid climate offers cold winters and mild
-						summers with a brief monsoon period.
-					</p>
-				</section>
-				{/* Transport */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Transport
-					</h2>
-					<div className="grid md:grid-cols-2 gap-4">
-						<div>
-							<h3 className="font-semibold text-lg">Air</h3>
-							<ul className="list-disc list-inside">
-								<li>Leh Airport</li>
-							</ul>
-						</div>
-						<div>
-							<h3 className="font-semibold text-lg">Road</h3>
-							<ul className="list-disc list-inside">
-								<li>National Highways & mountain roads</li>
-							</ul>
-						</div>
+			{/* Main Content */}
+			<main className="w-3/4">
+				<h1 className="text-3xl font-bold mb-4 text-center">Ladakh</h1>
+
+				<img
+					src={ladakhMap}
+					alt="Ladakh Map"
+					className="rounded-lg shadow-md w-full mb-4"
+				/>
+				<p className="text-sm italic text-center text-gray-500 mb-8">
+					Map showing major roads, railways, rivers, national
+					highways, etc. <br />
+					Disclaimer: All efforts have been made to make this image
+					accurate. However Mapping Digiworld Pvt Ltd and its
+					directors do not own any responsibility for the correctness
+					or authenticity of the same.
+				</p>
+
+				<section className="space-y-6">
+					<div>
+						<h2 className="text-2xl font-semibold">About Ladakh</h2>
+						<p>
+							Ladakh was formed from the state of Jammu and
+							Kashmir on October 31, 2019, following the
+							abrogation of Article 370. It comprises two
+							districts — <strong>Leh</strong> and{" "}
+							<strong>Kargil</strong> — and is administered as a
+							Union Territory directly by the central government.
+						</p>
+						<p>
+							Ladakh has its own police force and receives direct
+							funding from the Centre. It comes under the
+							jurisdiction of the Jammu & Kashmir High Court and
+							follows central civil service rules. The first
+							Lieutenant Governor of Ladakh was Radha Krishna
+							Mathur.
+						</p>
+					</div>
+
+					<div>
+						<h2 className="text-2xl font-semibold">
+							Transportation
+						</h2>
+						<p>
+							Ladakh has around 1,800 km of roads, of which 800 km
+							are surfaced. The{" "}
+							<strong>Kushok Bakula Rimpochee Airport</strong> in
+							Leh connects Ladakh to Delhi and other major cities.
+							Kargil also has a functioning airport.
+						</p>
+					</div>
+
+					<div>
+						<h2 className="text-2xl font-semibold">Quick Facts</h2>
+						<ul className="list-disc list-inside">
+							<li>Date of Formation: October 31, 2019</li>
+							<li>Districts: Leh, Kargil</li>
+							<li>
+								Union Territory governed by: Ministry of Home
+								Affairs
+							</li>
+							<li>Judiciary: Under Jammu & Kashmir High Court</li>
+							<li>First LG: R.K. Mathur</li>
+							<li>Key Airports: Leh, Kargil</li>
+							<li>Languages: Ladakhi, Urdu, Hindi, English</li>
+							<li>
+								Famous for: Buddhist monasteries, mountains,
+								lakes like Pangong Tso & Tso Moriri
+							</li>
+						</ul>
 					</div>
 				</section>
-				{/* Government */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Government
-					</h2>
-					<ul className="list-disc list-inside">
-						<li>Administered as a Union Territory</li>
-						<li>Divided into two districts</li>
-					</ul>
-				</section>
-			</div>
-
-			{/* Right Sidebar: District Info */}
-			<div className="md:w-1/4 w-full bg-white rounded-lg shadow-md p-6 h-fit sticky top-10">
-				<h2 className="text-2xl font-bold mb-4 text-[#2E3A59] border-b pb-2">
-					{selectedDistrict} District
-				</h2>
-				<p className="text-lg leading-relaxed text-gray-700">
-					{districtInfo[selectedDistrict]}
-				</p>
-				<div className="mt-6">
-					<h3 className="text-lg font-semibold mb-2">Key Features</h3>
-					<ul className="list-disc list-inside space-y-1 text-gray-600">
-						{selectedDistrict === "Leh" && (
-							<>
-								<li>Ancient Monasteries</li>
-								<li>Scenic Mountain Views</li>
-								<li>Cultural Heritage</li>
-							</>
-						)}
-						{selectedDistrict === "Kargil" && (
-							<>
-								<li>Historic Sites</li>
-								<li>Rugged Landscapes</li>
-								<li>Cultural Traditions</li>
-							</>
-						)}
-					</ul>
-				</div>
-			</div>
+			</main>
 		</div>
 	);
 };

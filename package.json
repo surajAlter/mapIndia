@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@vishalvoid/react-india-map": "^1.2.0",
     "framer-motion": "^12.6.3",
+    "html-react-parser": "^5.2.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icon": "^1.0.0",
