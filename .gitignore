@@ -7,6 +7,8 @@
 
 # testing
 /coverage
+/test
+Map.js
 
 # production
 /build
