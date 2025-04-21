@@ -41,7 +41,7 @@ const idToSlugMap = {
   "IN-UT": "uttarakhand",
   "IN-WB": "west-bengal",
   "IN-LA": "ladakh",
-  "IN-JK": "jammu-kashmir"
+  "IN-JK": "jammu-kashmir",
 };
 
 const statesData = [
@@ -72,7 +72,7 @@ const statesData = [
   { text: "Tripura", description: "Home to Neermahal and bamboo forests.", path: "/states/tripura" },
   { text: "Uttar Pradesh", description: "Taj Mahal is in Agra.", path: "/states/uttar-pradesh" },
   { text: "Uttarakhand", description: "Land of Yoga and Char Dham.", path: "/states/uttarakhand" },
-  { text: "West Bengal", description: "Famous for Durga Puja and Sweets.", path: "/states/west-bengal" }
+  { text: "West Bengal", description: "Famous for Durga Puja and Sweets.", path: "/states/west-bengal" },
 ];
 
 const utsData = [
@@ -83,7 +83,7 @@ const utsData = [
   { text: "Lakshadweep", description: "Beautiful coral islands.", path: "/states/lakshadweep" },
   { text: "Delhi", description: "Capital of India with historic monuments.", path: "/states/delhi" },
   { text: "Puducherry", description: "French-inspired coastal town.", path: "/states/puducherry" },
-  { text: "Ladakh", description: "Mountain desert with Buddhist monasteries.", path: "/states/ladakh" }
+  { text: "Ladakh", description: "Mountain desert with Buddhist monasteries.", path: "/states/ladakh" },
 ];
 
 const StatesPage = () => {
@@ -93,32 +93,32 @@ const StatesPage = () => {
     const svg = document.getElementById("india-svg");
     if (!svg) return;
     const paths = svg.querySelectorAll("path");
-  
+
     paths.forEach((path) => {
       const slug = idToSlugMap[path.id];
       if (slug) {
         path.style.cursor = "pointer";
         path.style.transition = "transform 0.3s ease, opacity 0.2s ease";
-  
+
         path.addEventListener("mouseenter", () => {
           path.style.opacity = 0.7;
         });
-  
+
         path.addEventListener("mouseleave", () => {
           path.style.opacity = 1;
           path.style.transform = "none";
         });
-  
+
         path.addEventListener("click", () => {
           path.style.transform = "scale(1.1) rotateX(10deg) rotateY(10deg)";
           setTimeout(() => {
             path.style.transform = "none";
             navigate(`/states/${slug}`);
-          }, 250); // wait for animation to finish
+          }, 250);
         });
       }
     });
-  
+
     return () => {
       paths.forEach((path) => {
         const slug = idToSlugMap[path.id];
@@ -128,83 +128,71 @@ const StatesPage = () => {
       });
     };
   }, [navigate]);
-  
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
       <Sidebar />
-
       <div className="flex-1 p-6 overflow-auto">
-        <motion.div
-          className="max-w-6xl mx-auto bg-white shadow-md rounded-lg p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+        <motion.h1
+          className="text-3xl font-bold text-center text-gray-800 mb-6"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
         >
-          <motion.h1
-            className="text-3xl font-bold text-center text-gray-800 mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            Indian States & Union Territories
-          </motion.h1>
+          Indian States & Union Territories
+        </motion.h1>
 
-          {/* Map Section */}
-          <div className="w-full overflow-x-auto rounded-3xl shadow-2xl bg-white p-4 md:p-6 hover:shadow-3xl transition-all duration-500 mb-10">
-            <div className="inline-block min-w-[600px] max-w-[1000px] mx-auto">
-              <IndiaMap
-                id="india-svg"
-                className="w-full h-auto"
-              />
-            </div>
+        {/* Map Section */}
+        <div className="w-full overflow-x-auto rounded-2xl shadow-md bg-white p-4 md:p-6 mb-10">
+          <div className="inline-block min-w-[600px] max-w-[1000px] mx-auto">
+            <IndiaMap id="india-svg" className="w-full h-auto" />
           </div>
+        </div>
 
-          {/* States Section */}
-          <motion.h2 className="text-2xl font-semibold mb-4">States</motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            {statesData.map((state, idx) => (
-              <motion.div
-                key={idx}
-                className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg shadow-sm cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.03, duration: 0.4 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.15)",
-                }}
-                onClick={() => navigate(state.path)}
-              >
-                <h2 className="text-lg font-semibold text-blue-700">{state.text}</h2>
-                <p className="text-gray-700">{state.description}</p>
-              </motion.div>
-            ))}
-          </div>
+        {/* States Section */}
+        <motion.h2 className="text-2xl font-semibold mb-4">States</motion.h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          {statesData.map((state, idx) => (
+            <motion.div
+              key={idx}
+              className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg shadow-sm cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.03, duration: 0.4 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.15)",
+              }}
+              onClick={() => navigate(state.path)}
+            >
+              <h2 className="text-lg font-semibold text-blue-700">{state.text}</h2>
+              <p className="text-gray-700">{state.description}</p>
+            </motion.div>
+          ))}
+        </div>
 
-          {/* Union Territories Section */}
-          <motion.h2 className="text-2xl font-semibold mt-8 mb-4">Union Territories</motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-            {utsData.map((ut, idx) => (
-              <motion.div
-                key={idx}
-                className="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg shadow-sm cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.03, duration: 0.4 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.15)",
-                }}
-                onClick={() => navigate(ut.path)}
-              >
-                <h2 className="text-lg font-semibold text-green-700">{ut.text}</h2>
-                <p className="text-gray-700">{ut.description}</p>
-              </motion.div>
-            ))}
-          </div>
+        {/* Union Territories Section */}
+        <motion.h2 className="text-2xl font-semibold mt-8 mb-4">Union Territories</motion.h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          {utsData.map((ut, idx) => (
+            <motion.div
+              key={idx}
+              className="bg-green-50 border-l-4 border-green-500 p-4 rounded-lg shadow-sm cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.03, duration: 0.4 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.15)",
+              }}
+              onClick={() => navigate(ut.path)}
+            >
+              <h2 className="text-lg font-semibold text-green-700">{ut.text}</h2>
+              <p className="text-gray-700">{ut.description}</p>
+            </motion.div>
+          ))}
+        </div>
 
-        </motion.div>
       </div>
     </div>
   );
