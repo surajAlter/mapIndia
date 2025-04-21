@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Logo from "../assets/image.jpg";
-import { FaSearch, FaAngleDown } from "react-icons/fa";
+import { FaSearch, FaAngleDown, FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const [dropdowns, setDropdowns] = useState({
@@ -15,6 +15,7 @@ const Navbar = () => {
   });
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const dropdownRefs = {
     states: useRef(null),
@@ -78,7 +79,7 @@ const Navbar = () => {
       { text: "Climate Map", path: "/maps/climate" },
       { text: "Topographic Map", path: "/maps/topographic" },
       { text: "Soil Map", path: "/maps/soil" },
-      { text: "More...", path: "/maps" }
+      { text: "More...", path: "/maps" },
     ],
     // indiaTravel: ["Hotels in India", "Tourist Places in India", "Coming Soon", "Beaches in India", "Religious Places in India", { text: "More...", path: "/travel" }],
     // myIndia: ["Movie Reviews", "Travel", "Society", "Government", "Indian Food", "Politics", { text: "More...", path: "/myindia" }],
@@ -90,20 +91,20 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-md">
       {/* Topbar */}
-      <div className="flex justify-between items-center px-8 py-3 border-b">
+      <div className="flex flex-wrap justify-between items-center px-4 md:px-8 py-3 border-b gap-4">
         <div className="flex items-center space-x-3">
-          <img src={Logo} alt="Maps of India" className="h-12 rounded-md shadow-sm" />
-          <span className="text-2xl font-bold text-red-600">
+          <img src={Logo} alt="Maps of India" className="h-10 md:h-12 rounded-md shadow-sm" />
+          <span className="text-xl md:text-2xl font-bold text-red-600">
             Maps<span className="text-blue-600">Xplorer</span>.com
           </span>
         </div>
 
         {/* Google Search */}
-        <div className="flex items-center bg-gray-100 border rounded-full px-4 py-2 space-x-2 shadow-sm">
+        <div className="flex items-center bg-gray-100 border rounded-full px-2 py-2 space-x-2 shadow-sm w-full md:w-auto">
           <input
             type="text"
             placeholder="Search anything..."
-            className="outline-none bg-transparent w-64 text-sm px-2"
+            className="outline-none bg-transparent w-full md:w-64 text-sm px-2"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyPress}
@@ -115,11 +116,18 @@ const Navbar = () => {
             <FaSearch />
           </button>
         </div>
+
+        {/* Hamburger for Mobile */}
+        <div className="md:hidden">
+          <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">
+            <FaBars />
+          </button>
+        </div>
       </div>
 
       {/* Menu Bar */}
-      <div className="bg-blue-600 text-white text-sm flex px-8 relative z-30">
-        <a href="/" className="px-5 py-3 hover:bg-blue-700 transition-all font-bold">Home</a>
+      <div className={`bg-blue-600 text-white text-sm md:flex ${menuOpen ? "block" : "hidden"} md:px-8`}>
+        <a href="/" className="block px-5 py-3 hover:bg-blue-700 transition-all font-bold">Home</a>
         {Object.keys(dropdownItems).map((key) => (
           <div className="relative" key={key} ref={dropdownRefs[key]}>
             <button
@@ -150,8 +158,8 @@ const Navbar = () => {
       </div>
 
       {/* Bottom Contact Bar */}
-      <div className="px-8 py-3 text-sm text-red-600 bg-gray-100 border-t">
-        For Custom/Business Map Quote <span className="font-bold">+91 8929683196</span> | 
+      <div className="px-4 md:px-8 py-3 text-sm text-red-600 bg-gray-100 border-t text-center">
+        For Custom/Business Map Quote <span className="font-bold">+91 8929683196</span> |
         <a href="mailto:saurabh@businesbasket.com" className="text-blue-600 underline ml-2">
           saurabh@businessbasket.com
         </a>
@@ -161,3 +169,10 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+ // indiaTravel: ["Hotels in India", "Tourist Places in India", "Coming Soon", "Beaches in India", "Religious Places in India", { text: "More...", path: "/travel" }],
+    // myIndia: ["Movie Reviews", "Travel", "Society", "Government", "Indian Food", "Politics", { text: "More...", path: "/myindia" }],
+    // utilities: ["Pin Codes", "STD Search", "Railway Time Table", "Flight Schedule", "Distance Calculator", "IFSC Code", { text: "More...", path: "/utilities" }],
+    // ourChannel: ["Education", "Election", "Sports", "Bharat ka Manchitra", { text: "More...", path: "/ourchannel" }],
+    // whatsNew: ["Upcoming Bollywood Movies", "Fair and Festival in India", "Events India", "Biographies of Famous Personalities", { text: "More...", path: "/whatsnew" }],
