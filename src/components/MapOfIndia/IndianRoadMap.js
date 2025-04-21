@@ -23,7 +23,7 @@ const IndiaRoadNetworkMap = () => {
     { name: "Jaipur Road Map", link: "/jaipur-road-map" },
     { name: "Ahmedabad Road Map", link: "/ahmedabad-road-map" },
     { name: "South India Road Map", link: "/south-india-road-map" },
-    { name: "Kundli Manesar Palwal (KMP) Expressway Map", link: "/kmp-expressway-map" },
+    { name: "KMP Expressway Map", link: "/kmp-expressway-map" },
     { name: "India Traffic Signs", link: "/india-traffic-signs" },
   ];
 
@@ -54,12 +54,12 @@ const IndiaRoadNetworkMap = () => {
           <h2 className="text-xl text-blue-700 mt-1">भारतीय सड़क नेटवर्क मानचित्र</h2>
         </header>
 
-        {/* Subtext */}
+        {/* CTA */}
         <p className="text-lg font-medium text-blue-600 mb-3">
           Click on any Section of the Map to Explore Further
         </p>
 
-        {/* Map Image */}
+        {/* Image */}
         <img
           src={roadMapImage}
           alt="Indian Road Network Map"
@@ -84,59 +84,32 @@ const IndiaRoadNetworkMap = () => {
           </svg>
         </div>
 
-        {/* Content Sections */}
-        <section className="space-y-10 text-base leading-relaxed bg-white p-6 rounded-xl shadow-sm">
-          <p>
-            India road maps make you familiar with the Indian road network. India has a total road network of 3,320,410 kilometres, which is the third largest in the world.
-          </p>
-
-          <p>
-            For every square kilometre of land, there is 0.66 km of highways — higher than the USA (0.65) and much higher than Brazil (0.20) or China (0.16).
-          </p>
-
-          <p>
-            As of 2002, 47.3% of India's roads were paved. By 2012, India had only 600 km of expressways compared to China's 74,000 km.
-          </p>
-
-          <p>
-            Recent projects like the Yamuna Expressway, National Highways Development Project, and Mumbai-Pune Expressway reflect India's major investment in road infrastructure.
-          </p>
-
-          <p>
-            According to Goldman Sachs, India will need US$1.7 trillion in the next decade to improve infrastructure, with a significant chunk for roadways.
-          </p>
-
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-700 mb-3">Indian Road Network Overview</h3>
-            <ul className="list-disc list-inside space-y-2">
-              <li>State Highways: 128,000 km</li>
-              <li>Expressways/National Highways: 66,754 km</li>
-              <li>Rural and Other Roads: 2,650,000 km</li>
-              <li>Important District Roads: 470,000 km</li>
-              <li>Total: Approx. 3,314,754 km</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-700 mb-3">Expressways in India</h3>
-            <p>High-speed access-controlled roads, expanding fast with a target of over 18,000 km.</p>
-          </div>
-
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-700 mb-3">National Highways</h3>
-            <p>Connecting major cities, ports, industrial hubs — managed by NHAI.</p>
-          </div>
-
-          <div>
-            <h3 className="text-2xl font-semibold text-gray-700 mb-3">State Highways</h3>
-            <p>Connecting National Highways and important district headquarters within states.</p>
-          </div>
+        {/* Info Section */}
+        <section className="space-y-6 bg-white p-6 rounded-xl shadow-sm text-base leading-relaxed">
+          <p>India road maps help you explore the vast road network across the country, featuring national highways, expressways, and rural roads.</p>
+          <p>India has the third-largest road network in the world, covering approximately 3,320,410 kilometers.</p>
+          <p>National Highways, managed by NHAI, connect key cities and economic hubs, while expressways provide fast, access-controlled routes.</p>
+          <p>Major projects like the Yamuna Expressway and Golden Quadrilateral have significantly enhanced connectivity.</p>
+          <p>Road infrastructure is crucial to India's economic growth, supporting trade, travel, and development in urban and rural areas.</p>
+          <p>Future plans involve expanding the expressway network and upgrading existing highways to improve traffic flow and safety.</p>
         </section>
 
-        {/* Footer Info */}
+        {/* Last Updated */}
         <footer className="mt-10 text-sm text-gray-500">
           Last Updated on: January 09, 2025
         </footer>
+
+        {/* Related Links */}
+        <section className="mt-12">
+          <h2 className="text-2xl font-semibold mb-6 text-gray-800">Related Links</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-gray-700">
+            {sidebarItems.map((item, idx) => (
+              <p key={idx} className="hover:text-blue-600 cursor-pointer transition duration-150">
+                • {item.name}
+              </p>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );

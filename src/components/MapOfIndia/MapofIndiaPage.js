@@ -29,111 +29,97 @@ const MapofIndiaPage = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="w-full md:w-3/4 p-6 md:p-10 max-w-6xl mx-auto text-gray-800">
-        {/* Main Map Image */}
-        <div className="flex justify-center">
+      <main className="w-full md:w-3/4 p-4 md:p-10">
+        {/* Hero Section: Title + Image */}
+        <section className="flex flex-col items-center text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-gray-800">
+            Map of India
+          </h1>
           <img
             src={mapImage}
             alt="Map of India"
             className="w-full max-w-3xl rounded-lg shadow-md"
           />
-        </div>
+        </section>
 
         {/* Text Content */}
-        <div className="mt-6 text-gray-800 space-y-4">
+        <section className="mt-8 text-gray-800 space-y-6 max-w-4xl mx-auto">
           <p>
-            India is officially known as the Republic of India. It comprises a total of 28
-            states along with eight union territories. India is the second most populated country
-            in the world and the world’s largest democracy. The country’s coastline measures 7,517
-            kilometres in length, out of which 5,423 kilometres belong to peninsular India, and
-            2,094 kilometres belong to Andaman, Nicobar, and Lakshadweep island chains.
+            India is officially known as the Republic of India. It comprises a total of 28 states along with eight union territories...
           </p>
 
           <p>
-            Broadly, India is divided into six major zones: East India, West India, North India,
-            South India, Northeast India, and Central India.
+            Broadly, India is divided into six major zones: East India, West India, North India, South India, Northeast India, and Central India.
           </p>
 
-          {/* Most Viewed Maps Section */}
+          {/* Most Viewed Maps */}
           <div className="mt-12">
-            <h2 className="text-2xl font-semibold text-center mb-6">Most Viewed Maps of India</h2>
+            <h2 className="text-2xl font-semibold text-center mb-8">Most Viewed Maps of India</h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {mostViewedMaps.map((map, idx) => (
-                <div key={idx} className="text-center">
+                <div
+                  key={idx}
+                  className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition"
+                  onClick={() => navigate(map.path)}
+                >
                   <img
                     src={map.image}
                     alt={map.title}
-                    className="h-48 w-auto object-cover rounded-md shadow"
+                    className="h-40 w-full object-cover rounded-md"
                   />
-                  <p className="mt-2 text-sm font-medium text-gray-800">{map.title}</p>
+                  <p className="mt-2 text-sm font-medium text-gray-700">{map.title}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-4 text-right pr-4">
+            <div className="mt-6 text-center">
               <button
                 onClick={() => navigate("/maps/india")}
-                className="text-blue-600 font-medium hover:underline"
+                className="text-blue-600 font-semibold hover:underline"
               >
                 See All &gt;&gt;
               </button>
             </div>
           </div>
 
-          {/* Regional Sections */}
-          <h2 className="text-lg font-semibold mt-8">Eastern India</h2>
-          <p>
-            Includes Bihar, Jharkhand, Odisha, West Bengal, and Andaman and Nicobar Islands.
-            Total population: 226,925,195. Covers 418,323 sq km. Major languages: Bengali,
-            Odia, Hindi, English, Maithili, Nepali, and Urdu.
-          </p>
+          {/* Zones */}
+          <div className="mt-12 space-y-6">
+            <h2 className="text-xl font-bold">Eastern India</h2>
+            <p>Includes Bihar, Jharkhand, Odisha, West Bengal, and Andaman and Nicobar Islands...</p>
 
-          <h2 className="text-lg font-semibold mt-4">Western India</h2>
-          <p>
-            Covers 508,052 sq km. Includes Gujarat, Goa, Maharashtra, Dadra & Nagar Haveli, and
-            Daman & Diu. Mumbai, the financial capital of India, is in Maharashtra. Official
-            languages: Marathi, Gujarati, Konkani, and English.
-          </p>
+            <h2 className="text-xl font-bold">Western India</h2>
+            <p>Includes Gujarat, Goa, Maharashtra, Dadra & Nagar Haveli, and Daman & Diu...</p>
 
-          <h2 className="text-lg font-semibold mt-4">North India</h2>
-          <p>
-            Includes Himachal Pradesh, Uttar Pradesh, Rajasthan, Uttarakhand, Punjab, Haryana,
-            Delhi, Chandigarh, Ladakh, and Jammu & Kashmir. Major cities: New Delhi, Lucknow,
-            Chandigarh.
-          </p>
+            <h2 className="text-xl font-bold">North India</h2>
+            <p>Includes Himachal Pradesh, Uttar Pradesh, Rajasthan, Uttarakhand, Punjab, Haryana...</p>
 
-          <h2 className="text-lg font-semibold mt-4">South India</h2>
-          <p>
-            Covers Tamil Nadu, Karnataka, Kerala, Andhra Pradesh, Telangana, Lakshadweep, and
-            Puducherry. Bengaluru is the IT hub of India.
-          </p>
+            <h2 className="text-xl font-bold">South India</h2>
+            <p>Covers Tamil Nadu, Karnataka, Kerala, Andhra Pradesh, Telangana...</p>
 
-          <h2 className="text-lg font-semibold mt-4">Northeast India</h2>
-          <p>
-            Includes the Seven Sister States: Arunachal Pradesh, Assam, Meghalaya, Tripura,
-            Mizoram, Manipur, and Nagaland, along with Sikkim.
-          </p>
+            <h2 className="text-xl font-bold">Northeast India</h2>
+            <p>Includes Seven Sister States and Sikkim.</p>
 
-          <h2 className="text-lg font-semibold mt-4">Central India</h2>
-          <p>Includes Madhya Pradesh and Chhattisgarh.</p>
+            <h2 className="text-xl font-bold">Central India</h2>
+            <p>Includes Madhya Pradesh and Chhattisgarh.</p>
 
-          <h2 className="text-lg font-semibold mt-4">India General Maps</h2>
-          <ul className="list-disc pl-6">
-            <li>India Political Map</li>
-            <li>India Road Map</li>
-            <li>India River Map</li>
-            <li>India Vegetation Map</li>
-            <li>India Nuclear Plant Map</li>
-            <li>Poverty Map of India</li>
-            <li>India Physical Map</li>
-            <li>India Tourist Map</li>
-            <li>Indian Railway Map</li>
-            <li>Thermal Power Plant Map</li>
-          </ul>
+            <h2 className="text-xl font-bold">India General Maps</h2>
+            <ul className="list-disc list-inside">
+              <li>India Political Map</li>
+              <li>India Road Map</li>
+              <li>India River Map</li>
+              <li>India Vegetation Map</li>
+              <li>India Nuclear Plant Map</li>
+              <li>Poverty Map of India</li>
+              <li>India Physical Map</li>
+              <li>India Tourist Map</li>
+              <li>Indian Railway Map</li>
+              <li>Thermal Power Plant Map</li>
+            </ul>
 
-          <p className="text-gray-500 text-sm mt-4">Last Updated on: January 09, 2025</p>
-        </div>
+            <p className="text-gray-500 text-sm">Last Updated on: January 09, 2025</p>
+          </div>
+        </section>
       </main>
     </div>
   );
