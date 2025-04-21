@@ -16,17 +16,21 @@ const HomePage = () => {
         <Sidebar />
         <main className="w-full md:w-3/4 flex flex-col md:flex-row gap-6">
           <WelcomeSection />
-          <SponsorSection />
         </main>
       </div>
 
-      {/* Divider to add spacing */}
+      {/* Divider */}
       <hr className="my-10 border-gray-300" />
 
-      {/* Client Feedback Section (Below everything) */}
+      {/* Client Feedback Section */}
       <div className="container mx-auto px-6">
         <h2 className="text-2xl font-bold text-center mb-4">What Our Clients Say</h2>
         <ClientFeedback />
+      </div>
+
+      {/* Sponsor Section */}
+      <div className="container mx-auto px-6 mt-10 mb-10">
+        <SponsorSection />
       </div>
     </div>
   );

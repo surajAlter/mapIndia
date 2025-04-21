@@ -1,38 +1,55 @@
 import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 import madhyaPradeshMap from '../../assets/State/MadhyaPradesh/Madhyapradesh.jpg';
 
 const cities = [
-  'Bhopal',
-  'Indore',
-  'Gwalior',
-  'Jabalpur',
-  'Ujjain',
-  'Sagar',
-  'Rewa',
-  'Satna',
-  'Ratlam',
-  'Dewas',
-  'Chhindwara',
-  'Katni',
-  'Khandwa',
-  'Shivpuri',
-  'Vidisha'
+  'Bhopal', 'Indore', 'Gwalior', 'Jabalpur', 'Ujjain', 'Sagar',
+  'Rewa', 'Satna', 'Ratlam', 'Dewas', 'Chhindwara',
+  'Katni', 'Khandwa', 'Shivpuri', 'Vidisha'
 ];
+
+const cityInfo = {
+  Bhopal: 'Bhopal is the capital of Madhya Pradesh and is known as the "City of Lakes." It is famous for its historic sites and vibrant culture.',
+  Indore: 'Indore is the largest city in Madhya Pradesh and is known for its thriving economy, bustling markets, and rich culinary culture.',
+  Gwalior: 'Gwalior is famous for its historic fort, temples, and vibrant music and art scene.',
+  // Add more city info as needed...
+};
 
 const MadhyaPradesh = () => {
   const [selectedCity, setSelectedCity] = useState('Bhopal');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex max-w-6xl mx-auto p-6">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#f9fafb] text-[#2E3A59]">
+      
+      {/* Mobile Menu Button */}
+      <div className="lg:hidden bg-white p-4 flex justify-between items-center shadow-md sticky top-0 z-20">
+        <h1 className="text-xl font-bold text-orange-600">Madhya Pradesh</h1>
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <aside className="w-1/4 pr-6">
-        <h2 className="text-xl font-semibold mb-4">Cities</h2>
+      <aside
+        className={`lg:w-1/4 w-full bg-white border-r px-4 py-6 shadow-sm transition-all duration-300 z-10 ${
+          isMenuOpen ? 'block' : 'hidden'
+        } lg:block`}
+      >
+        <h2 className="text-2xl font-bold mb-4 text-[#0f172a]">Cities</h2>
         <ul className="space-y-2">
           {cities.map((city) => (
             <li
               key={city}
-              className={`cursor-pointer px-3 py-2 rounded-lg hover:bg-blue-100 ${selectedCity === city ? 'bg-blue-200 font-semibold' : ''}`}
-              onClick={() => setSelectedCity(city)}
+              onClick={() => {
+                setSelectedCity(city);
+                setIsMenuOpen(false); // Close menu on mobile after selection
+              }}
+              className={`cursor-pointer px-3 py-2 rounded-xl transition-all ${
+                selectedCity === city
+                  ? 'bg-orange-600 text-white font-semibold'
+                  : 'hover:bg-orange-100'
+              }`}
             >
               {city}
             </li>
@@ -41,56 +58,82 @@ const MadhyaPradesh = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="w-3/4">
-        <h1 className="text-3xl font-bold mb-4 text-center">Madhya Pradesh</h1>
+      <main className="flex-1 px-6 py-10 space-y-10">
+        <div className="w-full h-64 sm:h-96">
+          <img
+            src={madhyaPradeshMap}
+            alt="Madhya Pradesh"
+            className="w-full h-full object-cover rounded-2xl shadow-md"
+          />
+        </div>
 
-        <img
-          src={madhyaPradeshMap}
-          alt="Madhya Pradesh Map"
-          className="rounded-lg shadow-md w-full mb-4"
-        />
-        <p className="text-sm italic text-center text-gray-500 mb-8">
-          Map showing major roads, railways, rivers, national highways, etc. <br />
-          Disclaimer: All efforts have been made to make this image accurate. However Mapping Digiworld Pvt Ltd and its directors do not own any responsibility for the correctness or authenticity of the same.
-        </p>
+        <section>
+          <h1 className="text-4xl font-bold mb-4">Madhya Pradesh</h1>
+          <p className="text-lg leading-7">
+            Madhya Pradesh is a landlocked state in central India. Known for its rich history, culture, and natural beauty...
+          </p>
+        </section>
 
-        <section className="space-y-6">
-          <div>
-            <h2 className="text-2xl font-semibold">About Madhya Pradesh</h2>
-            <p>
-              Landlocked in the central part of the country, Madhya Pradesh is bordered by the states of Rajasthan to its northwest, Uttar Pradesh to its north, Chhattisgarh to its east, Maharashtra to its south, and Gujarat to its west. Madhya Pradesh had the honour of being the largest state of the country until Chhattisgarh was carved out of it on November 1, 2000.
-            </p>
-            <p>
-              Madhya Pradesh has a mixed topography that consists of both hills and plains. The state has three predominant seasons: winter (November to February), summer (March to May), and the monsoon season (June to September). During the winter, average temperatures range from 10° to 27° C (50° to 81° F). Summers are hot, with an average temperature of 29° C (85° F) and a high temperature that at times reaches 48° C (118° F). During the monsoon season average temperature lies between average 19° to 30° C (66° to 86°). Madhya Pradesh receives an average annual rainfall of about 1200 mm (nearly 50 inches), of which 90 percent falls during the monsoon season. The capital of the state is Bhopal.
-            </p>
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Quick Facts</h2>
+          <ul className="list-disc list-inside space-y-1 text-gray-700">
+            <li><strong>Date of Formation:</strong> November 1, 1956</li>
+            <li><strong>Area:</strong> 308,244 sq km</li>
+            <li><strong>Capital:</strong> Bhopal</li>
+            <li><strong>Famous for:</strong> Historic sites, wildlife parks, and the Narmada River</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Tourism</h2>
+          <ul className="list-disc list-inside space-y-1 text-gray-700">
+            <li>Kanha National Park</li>
+            <li>Khajuraho Temples</li>
+            <li>Sanchi Stupa</li>
+            <li>Ujjain Mahakaleshwar Temple</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Geography & Climate</h2>
+          <p className="text-lg text-gray-700">
+            Madhya Pradesh has a varied climate, with hot summers, cool winters, and monsoons...
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Transport</h2>
+          <div className="grid md:grid-cols-2 gap-4 text-gray-700">
+            <div>
+              <h3 className="font-semibold text-lg">Air</h3>
+              <ul className="list-disc list-inside">
+                <li>Indore Devi Ahilya Bai Holkar Airport</li>
+                <li>Bhopal Raja Bhoj Airport</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg">Rail</h3>
+              <ul className="list-disc list-inside">
+                <li>Bhopal, Indore, Jabalpur (Major Railway Stations)</li>
+              </ul>
+            </div>
           </div>
+        </section>
 
-          <div>
-            <h2 className="text-2xl font-semibold">Facts on Madhya Pradesh</h2>
-            <ul className="list-disc list-inside">
-              <li>Official Website: www.mp.nic.in</li>
-              <li>Date of Formation: Nov 1, 1956</li>
-              <li>Area: 308,244 sq km</li>
-              <li>Density: 236/Km²</li>
-              <li>Population (2011): 72,626,809</li>
-              <li>Males Population (2011): 37,612,306</li>
-              <li>Females Population (2011): 35,014,503</li>
-              <li>No. of Districts: 51</li>
-              <li>Capital: Bhopal</li>
-              <li>Rivers: Narmada, Tapti, Ken, Betwa, Son, Chambal</li>
-              <li>Forests & National Parks: Bandhavgarh NP, Kanha NP, Pench NP, Kheoni WS</li>
-              <li>Languages: Punjabi, Malvi, Nimadi, Punjabi, Bhilodi, Gondi, Korku, Kalto, Nihali</li>
-              <li>Neighbours: Maharashtra, Gujarat, Rajasthan, Uttar Pradesh, Chhattisgarh</li>
-              <li>State Animal: Swamp Deer</li>
-              <li>State Bird: Paradise Fly-catcher</li>
-              <li>State Tree: Banyan</li>
-              <li>Net State Domestic Product (2011): ₹32,222 crore</li>
-              <li>Literacy Rate (2011): 82.91%</li>
-              <li>Females per 1000 males: 930</li>
-              <li>Assembly constituencies: 230</li>
-              <li>Parliamentary constituencies: 29</li>
-            </ul>
-          </div>
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Government</h2>
+          <ul className="list-disc list-inside text-gray-700">
+            <li>Governor: Mangubhai C. Patel</li>
+            <li>Chief Minister: Shivraj Singh Chouhan</li>
+            <li>Legislature: Bicameral</li>
+          </ul>
+        </section>
+
+        <section className="border-t pt-6">
+          <h2 className="text-3xl font-semibold text-orange-600 mb-2">
+            {selectedCity} City Details
+          </h2>
+          <p className="text-lg text-gray-700">{cityInfo[selectedCity]}</p>
         </section>
       </main>
     </div>

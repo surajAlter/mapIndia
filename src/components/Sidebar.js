@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react"; // Icon from lucide-react (install if needed)
 
 const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => setIsOpen(!isOpen);
+
   const sidebarSections = [
     {
       title: "Maps of India",
       links: [
         { name: "Map of India", path: "/map-of-india" },
-        { name: "Physical Map of India", path: "/physical-map" },
+        { name: "Physical Map of India", path: "/maps/political" },
         { name: "Outline Map of India", path: "/outline-map" },
         { name: "More...", path: "/moreinfopage" },
       ],
@@ -41,16 +46,15 @@ const Sidebar = () => {
         { name: "Hill Stations", path: "/hill-stations" },
         { name: "More...", path: "/india-travel" },
       ],
-      
     },
     {
       title: "India States & Union Territories",
       links: [
-        { name: "Kerala", path: "/kerala" },
-        { name: "Goa", path: "/goa" },
-        { name: "Gujarat", path: "/gujarat" },
-        { name: "Rajasthan", path: "/rajasthan" },
-        { name: "More...", path: "/states-ut" },
+        { name: "Kerala", path: "/States/kerala" },
+        { name: "Goa", path: "/State/goa" },
+        { name: "Gujarat", path: "/States/gujarat" },
+        { name: "Rajasthan", path: "/States/rajasthan" },
+        { name: "More...", path: "/states" },
       ],
     },
     {
@@ -102,29 +106,50 @@ const Sidebar = () => {
         { name: "More...", path: "/indien-karten" },
       ],
     },
-    
   ];
 
   return (
-    <aside className="w-full md:w-1/4 bg-white p-4 shadow-md">
-      <h2 className="text-lg font-semibold text-blue-600">Linkages</h2>
-      {sidebarSections.map((section, index) => (
-        <div key={index} className="mt-4">
-          <h3 className="text-md font-semibold text-white bg-blue-600 px-2 py-1">
-            {section.title}
-          </h3>
-          <ul className="mt-2 text-sm space-y-2">
-            {section.links.map((link, i) => (
-              <li key={i}>
-                <Link to={link.path} className="text-gray-700 hover:text-blue-600">
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </aside>
+    <>
+      {/* Mobile menu button */}
+      <div className="md:hidden flex justify-between items-center p-4 bg-white shadow">
+        <h2 className="text-lg font-bold text-blue-700">Linkages</h2>
+        <button
+          onClick={toggleSidebar}
+          className="text-blue-700 hover:text-blue-900"
+        >
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* Sidebar */}
+      <aside
+        className={`bg-white p-4 shadow-md md:block h-full overflow-y-auto transition-all duration-300 ${
+          isOpen ? "block" : "hidden"
+        } md:w-64 lg:w-72`}
+      >
+        <h2 className="text-xl font-bold text-blue-700 mb-4 hidden md:block">Linkages</h2>
+        {sidebarSections.map((section, index) => (
+          <div key={index} className="mb-6">
+            <h3 className="text-md font-semibold bg-blue-600 text-white px-3 py-1 rounded">
+              {section.title}
+            </h3>
+            <ul className="mt-2 text-sm space-y-1">
+              {section.links.map((link, i) => (
+                <li key={i}>
+                  <Link
+                    to={link.path}
+                    className="block px-2 py-1 text-gray-700 rounded hover:bg-blue-100 hover:text-blue-700"
+                    onClick={() => setIsOpen(false)} // close on mobile click
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </aside>
+    </>
   );
 };
 

@@ -68,22 +68,34 @@ const Navbar = () => {
       { text: "Haryana", path: "/states/haryana" },
       { text: "More...", path: "/states" },
     ],
-    
-    cities: ["Delhi", "Mumbai", "Kolkata", "Chennai", "Bangalore", { text: "More...", path: "/cities" }],
-    maps: ["Political Map", "Physical Map", "Outline Map", "Railway Map", "Road Map", { text: "More...", path: "/maps" }],
-    indiaTravel: ["Hotels in India", "Tourist Places in India", "Hill Stations", "Beaches in India", "Religious Places in India", { text: "More...", path: "/travel" }],
-    myIndia: ["Movie Reviews", "Travel", "Society", "Government", "Indian Food", "Politics", { text: "More...", path: "/myindia" }],
-    utilities: ["Pin Codes", "STD Search", "Railway Time Table", "Flight Schedule", "Distance Calculator", "IFSC Code", { text: "More...", path: "/utilities" }],
-    ourChannel: ["Education", "Election", "Sports", "Bharat ka Manchitra", { text: "More...", path: "/ourchannel" }],
-    whatsNew: ["Upcoming Bollywood Movies", "Fair and Festival in India", "Events India", "Biographies of Famous Personalities", { text: "More...", path: "/whatsnew" }],
+    maps: [
+      { text: "Political Map", path: "/maps/political" },
+      { text: "Physical Map", path: "/maps/physical" },
+      { text: "Outline Map", path: "/maps/outline" },
+      { text: "Railway Map", path: "/maps/railway" },
+      { text: "Road Map", path: "/maps/road" },
+      { text: "River Map", path: "/maps/river" },
+      { text: "Climate Map", path: "/maps/climate" },
+      { text: "Topographic Map", path: "/maps/topographic" },
+      { text: "Soil Map", path: "/maps/soil" },
+      { text: "More...", path: "/maps" }
+    ],
+    // indiaTravel: ["Hotels in India", "Tourist Places in India", "Coming Soon", "Beaches in India", "Religious Places in India", { text: "More...", path: "/travel" }],
+    // myIndia: ["Movie Reviews", "Travel", "Society", "Government", "Indian Food", "Politics", { text: "More...", path: "/myindia" }],
+    // utilities: ["Pin Codes", "STD Search", "Railway Time Table", "Flight Schedule", "Distance Calculator", "IFSC Code", { text: "More...", path: "/utilities" }],
+    // ourChannel: ["Education", "Election", "Sports", "Bharat ka Manchitra", { text: "More...", path: "/ourchannel" }],
+    // whatsNew: ["Upcoming Bollywood Movies", "Fair and Festival in India", "Events India", "Biographies of Famous Personalities", { text: "More...", path: "/whatsnew" }],
   };
 
   return (
     <nav className="bg-white shadow-md">
+      {/* Topbar */}
       <div className="flex justify-between items-center px-8 py-3 border-b">
         <div className="flex items-center space-x-3">
           <img src={Logo} alt="Maps of India" className="h-12 rounded-md shadow-sm" />
-          <span className="text-2xl font-bold text-red-600">Maps<span className="text-blue-600">ofIndia</span>.com</span>
+          <span className="text-2xl font-bold text-red-600">
+            Maps<span className="text-blue-600">Xplorer</span>.com
+          </span>
         </div>
 
         {/* Google Search */}
@@ -105,15 +117,21 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="bg-blue-600 text-white text-sm flex px-8 relative z-10">
+      {/* Menu Bar */}
+      <div className="bg-blue-600 text-white text-sm flex px-8 relative z-30">
         <a href="/" className="px-5 py-3 hover:bg-blue-700 transition-all font-bold">Home</a>
         {Object.keys(dropdownItems).map((key) => (
           <div className="relative" key={key} ref={dropdownRefs[key]}>
-            <button onClick={() => toggleDropdown(key)} className="flex items-center gap-1 px-5 py-3 hover:bg-blue-700 transition-all">
+            <button
+              onClick={() => toggleDropdown(key)}
+              className="flex items-center gap-1 px-5 py-3 hover:bg-blue-700 transition-all"
+            >
               {key.replace(/([A-Z])/g, ' $1').trim()} <FaAngleDown />
             </button>
+
+            {/* Dropdown Menu */}
             {dropdowns[key] && (
-              <div className="absolute left-0 mt-2 w-64 bg-white text-black shadow-lg rounded-lg overflow-hidden z-20 border">
+              <div className="absolute left-0 mt-2 w-64 bg-white text-black shadow-lg rounded-lg overflow-hidden z-50 border animate-fade-in-down">
                 {dropdownItems[key].map((item, index) => (
                   typeof item === "string" ? (
                     <a key={index} href="#" className="block px-4 py-2 hover:bg-gray-200 transition-all">
@@ -131,9 +149,12 @@ const Navbar = () => {
         ))}
       </div>
 
+      {/* Bottom Contact Bar */}
       <div className="px-8 py-3 text-sm text-red-600 bg-gray-100 border-t">
         For Custom/Business Map Quote <span className="font-bold">+91 8929683196</span> | 
-        <a href="mailto:apoorv@mappingdigiworld.com" className="text-blue-600 underline">apoorv@mappingdigiworld.com</a>
+        <a href="mailto:saurabh@businesbasket.com" className="text-blue-600 underline ml-2">
+          saurabh@businessbasket.com
+        </a>
       </div>
     </nav>
   );

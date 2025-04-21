@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as IndiaMap } from "../assets/Indian.svg"; // Adjust the path as needed
+import { ReactComponent as IndiaMap } from "../assets/Indian.svg"; // Make sure this path is correct
 
 const idToSlugMap = {
-  // ... (as defined above)
   "IN-AN": "andaman-nicobar",
   "IN-AP": "andhra-pradesh",
   "IN-AR": "arunachal-pradesh",
@@ -52,47 +51,70 @@ const WelcomeSection = () => {
 
     const paths = svg.querySelectorAll("path");
 
+    const handleMouseEnter = (path) => {
+      path.style.opacity = 0.8;
+    };
+
+    const handleMouseLeave = (path) => {
+      path.style.opacity = 1;
+    };
+
+    const handleClick = (slug) => {
+      navigate(`/states/${slug}`);
+    };
+
     paths.forEach((path) => {
       const stateId = path.id;
       const slug = idToSlugMap[stateId];
 
       if (slug) {
         path.style.cursor = "pointer";
-        path.addEventListener("mouseenter", () => {
-          path.style.opacity = 0.7;
-        });
-        path.addEventListener("mouseleave", () => {
-          path.style.opacity = 1;
-        });
-        path.addEventListener("click", () => {
-          navigate(`/states/${slug}`);
-        });
+        path.style.transition = "opacity 0.3s ease"; // Only opacity transition
+
+        // Define the event handlers
+        const onMouseEnter = () => handleMouseEnter(path);
+        const onMouseLeave = () => handleMouseLeave(path);
+        const onClick = () => handleClick(slug);
+
+        // Save them to the DOM node to clean up later
+        path.__onMouseEnter = onMouseEnter;
+        path.__onMouseLeave = onMouseLeave;
+        path.__onClick = onClick;
+
+        path.addEventListener("mouseenter", onMouseEnter);
+        path.addEventListener("mouseleave", onMouseLeave);
+        path.addEventListener("click", onClick);
       }
     });
 
-    // Cleanup event listeners on unmount
     return () => {
       paths.forEach((path) => {
         const stateId = path.id;
         const slug = idToSlugMap[stateId];
-        if (slug) {
-          path.removeEventListener("mouseenter", () => {});
-          path.removeEventListener("mouseleave", () => {});
-          path.removeEventListener("click", () => {});
+
+        if (slug && path.__onMouseEnter && path.__onMouseLeave && path.__onClick) {
+          path.removeEventListener("mouseenter", path.__onMouseEnter);
+          path.removeEventListener("mouseleave", path.__onMouseLeave);
+          path.removeEventListener("click", path.__onClick);
         }
       });
     };
   }, [navigate]);
 
   return (
-    <section className="w-full md:w-2/3 bg-white p-6 shadow-lg rounded-xl">
-      <h2 className="text-3xl font-extrabold text-gray-800">Welcome to Maps of India</h2>
-      <p className="text-gray-600 mt-2 leading-relaxed">
-        Explore interactive maps of India—navigate through states, cities, and discover rich
-        cultural and geographical diversity.
+    <section className="w-full max-w-6xl mx-auto px-4 md:px-8 py-10">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-center text-indigo-700 mb-6 drop-shadow-md">
+        Welcome to Xplorer
+      </h2>
+      <p className="text-gray-700 text-center text-base md:text-lg leading-relaxed mb-10">
+        Explore India's states and territories interactively — dive into the beauty of diversity with just a click.
       </p>
-      <div className="mt-6 w-full rounded-lg shadow-md">
-        <IndiaMap id="india-svg" />
+
+      {/* Responsive Scrollable Map */}
+      <div className="w-full overflow-x-auto rounded-3xl shadow-2xl bg-white p-4 md:p-6 hover:shadow-3xl transition-all duration-500">
+        <div className="inline-block min-w-[600px] max-w-[1000px] mx-auto">
+          <IndiaMap id="india-svg" className="w-full h-auto" />
+        </div>
       </div>
     </section>
   );
