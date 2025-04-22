@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as IndiaMap } from "../assets/pol/India.svg"; // Updated import
+import { ReactComponent as IndiaMap } from "../assets/pol/India.svg"; // Make sure this path is correct
 
 const idToSlugMap = {
   "IN-AN": "andaman-nicobar",
@@ -45,52 +45,77 @@ const idToSlugMap = {
 const WelcomeSection = () => {
   const navigate = useNavigate();
 
-  // Effect hook to handle SVG path click events
   useEffect(() => {
     const svg = document.getElementById("india-svg");
     if (!svg) return;
+
     const paths = svg.querySelectorAll("path");
 
-    // Attach click event listeners to each state path
+    const handleMouseEnter = (path) => {
+      path.style.opacity = 0.8;
+    };
+
+    const handleMouseLeave = (path) => {
+      path.style.opacity = 1;
+    };
+
+    const handleClick = (slug) => {
+      navigate(`/states/${slug}`);
+    };
+
     paths.forEach((path) => {
-      const slug = idToSlugMap[path.id];
-      if (!slug) return; // Skip if there's no corresponding slug
+      const stateId = path.id;
+      const slug = idToSlugMap[stateId];
 
-      path.style.cursor = "pointer"; // Change cursor to pointer
+      if (slug) {
+        path.style.cursor = "pointer";
+        path.style.transition = "opacity 0.3s ease"; // Only opacity transition
 
-      const onClick = () => navigate(`/states/${slug}`); // Navigate to respective state page
-      path.addEventListener("click", onClick);
+        // Define the event handlers
+        const onMouseEnter = () => handleMouseEnter(path);
+        const onMouseLeave = () => handleMouseLeave(path);
+        const onClick = () => handleClick(slug);
 
-      // Cleanup function
-      return () => path.removeEventListener("click", onClick);
+        // Save them to the DOM node to clean up later
+        path.__onMouseEnter = onMouseEnter;
+        path.__onMouseLeave = onMouseLeave;
+        path.__onClick = onClick;
+
+        path.addEventListener("mouseenter", onMouseEnter);
+        path.addEventListener("mouseleave", onMouseLeave);
+        path.addEventListener("click", onClick);
+      }
     });
+
+    return () => {
+      paths.forEach((path) => {
+        const stateId = path.id;
+        const slug = idToSlugMap[stateId];
+
+        if (slug && path.__onMouseEnter && path.__onMouseLeave && path.__onClick) {
+          path.removeEventListener("mouseenter", path.__onMouseEnter);
+          path.removeEventListener("mouseleave", path.__onMouseLeave);
+          path.removeEventListener("click", path.__onClick);
+        }
+      });
+    };
   }, [navigate]);
 
   return (
-    <section className="flex flex-col items-center text-center px-4 py-6">
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-        Discover the Maps of India
+    <section className="w-full max-w-6xl mx-auto px-4 md:px-8 py-10">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-center text-indigo-700 mb-6 drop-shadow-md">
+        Welcome to Xplorer
       </h2>
-      <p className="text-lg text-gray-600 mb-6">
+      <p className="text-gray-700 text-center text-base md:text-lg leading-relaxed mb-10">
         Explore India's states and territories interactively — dive into the beauty of diversity with just a click.
       </p>
 
-      {/* SVG map is now clickable */}
-      <IndiaMap
-        id="india-svg"
-        className="w-full max-w-3xl rounded-lg shadow-md"
-      />
-
-      <p className="mt-6 max-w-3xl text-gray-700 leading-relaxed">
-        India is officially known as the Republic of India. It comprises a total of 28 states along with eight union territories. Broadly, India is divided into six major zones: East, West, North, South, Northeast, and Central India.
-      </p>
-
-      <button
-        onClick={() => navigate("/maps/india")}
-        className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
-      >
-        Explore All Maps
-      </button>
+      {/* Responsive Scrollable Map */}
+      <div className="w-full overflow-x-auto rounded-3xl shadow-2xl bg-white p-4 md:p-6 hover:shadow-3xl transition-all duration-500">
+        <div className="inline-block min-w-[600px] max-w-[1000px] mx-auto">
+          <IndiaMap id="india-svg" className="w-full h-auto" />
+        </div>
+      </div>
     </section>
   );
 };
