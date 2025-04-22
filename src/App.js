@@ -51,6 +51,7 @@ import Uttarakhand from "./components/States/Uttarakhand";
 import WestBengal from "./components/States/WestBengal";
 import Ladakh from "./components/States/Ladakh";
 import JammuKashmir from "./components/States/JammuKashmir";
+import SearchPage from "./page/SearchPage";
 
 function App() {
 	return (
@@ -179,6 +180,7 @@ function App() {
 				<Route path="/travel" element={<TravelPage />} />
 				<Route path="/maps" element={<MapPage />} />
 				<Route path="/utilities" element={<Utility />} />
+				<Route path="/search" element={<SearchPage />} />
 			</Routes>
 		</Router>
 	);

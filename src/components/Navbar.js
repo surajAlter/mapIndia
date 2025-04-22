@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import Logo from "../assets/image.jpg";
 import { FaSearch, FaAngleDown } from "react-icons/fa";
+// import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	const [dropdowns, setDropdowns] = useState({
@@ -49,12 +51,27 @@ const Navbar = () => {
 	};
 
 	const handleSearch = () => {
-		if (searchQuery.trim() !== "") {
-			window.location.href = `https://www.google.com/search?q=${encodeURIComponent(
-				searchQuery
-			)}`;
+		if (searchQuery.trim()) {
+			window.location.assign(
+				`/search?q=${encodeURIComponent(searchQuery.trim())}`
+			);
 		}
 	};
+
+	// const navigate = useNavigate();
+	// const handleSearch = () => {
+	// 	if (searchQuery.trim()) {
+	// 		navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+	// 	}
+	// };
+
+	// const handleSearch = () => {
+	// 	if (searchQuery.trim() !== "") {
+	// 		window.location.href = `https://www.google.com/search?q=${encodeURIComponent(
+	// 			searchQuery
+	// 		)}`;
+	// 	}
+	// };
 
 	const handleKeyPress = (event) => {
 		if (event.key === "Enter") {
