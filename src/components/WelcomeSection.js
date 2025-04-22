@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as IndiaMap } from "../assets/Indian.svg"; // Adjust path as needed
+import { ReactComponent as IndiaMap } from "../assets/Indian.svg"; // Make sure this path is correct
 
 const idToSlugMap = {
   "IN-AN": "andaman-nicobar",
@@ -69,11 +69,17 @@ const WelcomeSection = () => {
 
       if (slug) {
         path.style.cursor = "pointer";
-        path.style.transition = "opacity 0.3s ease";
+        path.style.transition = "opacity 0.3s ease"; // Only opacity transition
 
+        // Define the event handlers
         const onMouseEnter = () => handleMouseEnter(path);
         const onMouseLeave = () => handleMouseLeave(path);
         const onClick = () => handleClick(slug);
+
+        // Save them to the DOM node to clean up later
+        path.__onMouseEnter = onMouseEnter;
+        path.__onMouseLeave = onMouseLeave;
+        path.__onClick = onClick;
 
         path.addEventListener("mouseenter", onMouseEnter);
         path.addEventListener("mouseleave", onMouseLeave);
@@ -104,14 +110,10 @@ const WelcomeSection = () => {
         Explore India's states and territories interactively — dive into the beauty of diversity with just a click.
       </p>
 
-      {/* Properly Fitted Map Section */}
-      <div className="flex justify-center items-center bg-white rounded-3xl shadow-2xl p-6 md:p-10 overflow-hidden">
-        <div className="w-full max-w-7xl">
-          <IndiaMap
-            id="india-svg"
-            className="w-full h-auto max-h-[700px] object-contain"
-            preserveAspectRatio="xMidYMid meet"
-          />
+      {/* Responsive Scrollable Map */}
+      <div className="w-full overflow-x-auto rounded-3xl shadow-2xl bg-white p-4 md:p-6 hover:shadow-3xl transition-all duration-500">
+        <div className="inline-block min-w-[600px] max-w-[1000px] mx-auto">
+          <IndiaMap id="india-svg" className="w-full h-auto" />
         </div>
       </div>
     </section>
