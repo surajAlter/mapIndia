@@ -171,3 +171,8 @@ const Navbar = () => {
 export default Navbar;
 
 
+ // indiaTravel: ["Hotels in India", "Tourist Places in India", "Coming Soon", "Beaches in India", "Religious Places in India", { text: "More...", path: "/travel" }],
+    // myIndia: ["Movie Reviews", "Travel", "Society", "Government", "Indian Food", "Politics", { text: "More...", path: "/myindia" }],
+    // utilities: ["Pin Codes", "STD Search", "Railway Time Table", "Flight Schedule", "Distance Calculator", "IFSC Code", { text: "More...", path: "/utilities" }],
+    // ourChannel: ["Education", "Election", "Sports", "Bharat ka Manchitra", { text: "More...", path: "/ourchannel" }],
+    // whatsNew: ["Upcoming Bollywood Movies", "Fair and Festival in India", "Events India", "Biographies of Famous Personalities", { text: "More...", path: "/whatsnew" }],
