@@ -14,7 +14,7 @@ const HomePage = () => {
       {/* Sidebar and Main Content */}
       <div className="container mx-auto px-6 py-4 flex flex-col md:flex-row gap-6">
         <Sidebar />
-        <main className="w-full flex flex-col gap-6">
+        <main className="w-full md:w-3/4 flex flex-col md:flex-row gap-6">
           <WelcomeSection />
         </main>
       </div>
