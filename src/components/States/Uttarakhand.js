@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Menu, X } from "lucide-react"; // Import Menu and X icons
+import uttarakhandMap from "../../assets/State/Uttarakhand/Uttarakhand.jpg";
 
 const Uttarakhand = () => {
 	const districts = ["Dehradun", "Nainital", "Haridwar", "Chamoli", "Almora"];
@@ -12,11 +14,26 @@ const Uttarakhand = () => {
 	};
 
 	const [selectedDistrict, setSelectedDistrict] = useState("Dehradun");
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
-		<div className="flex flex-col md:flex-row px-4 sm:px-10 md:px-20 py-10 text-[#333] gap-10">
-			{/* Left Sidebar: District List */}
-			<div className="md:w-1/4 w-full bg-gray-100 rounded-lg shadow-md p-4 h-fit sticky top-10">
+		<div className="flex flex-col md:flex-row min-h-screen bg-[#f9fafb] text-[#333]">
+			{/* Mobile menu button */}
+			<div className="md:hidden bg-white p-4 flex justify-between items-center shadow-md sticky top-0 z-20">
+				<h1 className="text-xl font-bold text-amber-600">
+					Uttarakhand
+				</h1>
+				<button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+					{isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+				</button>
+			</div>
+
+			{/* Sidebar: District List */}
+			<aside
+				className={`bg-gray-100 md:w-1/4 w-full p-4 shadow-md transition-all duration-300 z-10 ${
+					isMenuOpen ? "block" : "hidden"
+				} md:block`}
+			>
 				<h2 className="text-xl font-bold mb-4 text-[#2E3A59]">
 					Districts
 				</h2>
@@ -29,38 +46,38 @@ const Uttarakhand = () => {
 									? "bg-amber-600 text-white font-semibold"
 									: "hover:bg-amber-100"
 							}`}
-							onClick={() => setSelectedDistrict(district)}
+							onClick={() => {
+								setSelectedDistrict(district);
+								setIsMenuOpen(false); // Close menu after selecting
+							}}
 						>
 							{district}
 						</li>
 					))}
 				</ul>
-			</div>
+			</aside>
 
-			{/* Center Content Area */}
-			<div className="md:w-2/4 w-full space-y-10">
-				{/* Image */}
+			{/* Center Content */}
+			<main className="md:w-2/4 w-full p-6 space-y-10">
 				<div className="w-full h-64 sm:h-96">
 					<img
-						src={require("../../assets/State/Uttarakhand/Uttarakhand.jpg")}
+						src={uttarakhandMap}
 						alt="Uttarakhand"
 						className="w-full h-full object-contain rounded-lg shadow-md"
 					/>
 				</div>
 
-				{/* State Info Section */}
 				<section>
 					<h1 className="text-4xl font-bold text-[#2E3A59] mb-4">
 						Uttarakhand
 					</h1>
 					<p className="text-lg leading-7">
 						Nestled in the Himalayas, Uttarakhand is renowned for
-						its spiritual centers, breath­taking landscapes, and
+						its spiritual centers, breathtaking landscapes, and
 						adventure activities amidst pristine nature.
 					</p>
 				</section>
 
-				{/* Quick Facts */}
 				<section className="mb-10">
 					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
 						Quick Facts
@@ -81,7 +98,6 @@ const Uttarakhand = () => {
 					</ul>
 				</section>
 
-				{/* Tourism */}
 				<section className="mb-10">
 					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
 						Tourism
@@ -97,7 +113,6 @@ const Uttarakhand = () => {
 					</ul>
 				</section>
 
-				{/* Geography & Climate */}
 				<section className="mb-10">
 					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
 						Geography & Climate
@@ -109,7 +124,6 @@ const Uttarakhand = () => {
 					</p>
 				</section>
 
-				{/* Transport */}
 				<section className="mb-10">
 					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
 						Transport
@@ -131,7 +145,6 @@ const Uttarakhand = () => {
 					</div>
 				</section>
 
-				{/* Government */}
 				<section className="mb-10">
 					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
 						Government
@@ -144,16 +157,17 @@ const Uttarakhand = () => {
 						</li>
 					</ul>
 				</section>
-			</div>
+			</main>
 
 			{/* Right Sidebar: District Info */}
-			<div className="md:w-1/4 w-full bg-white rounded-lg shadow-md p-6 h-fit sticky top-10">
+			<aside className="md:w-1/4 w-full bg-white p-6 rounded-lg shadow-md sticky top-10">
 				<h2 className="text-2xl font-bold mb-4 text-[#2E3A59] border-b pb-2">
 					{selectedDistrict} District
 				</h2>
 				<p className="text-lg leading-relaxed text-gray-700">
 					{districtInfo[selectedDistrict]}
 				</p>
+
 				<div className="mt-6">
 					<h3 className="text-lg font-semibold mb-2">Key Features</h3>
 					<ul className="list-disc list-inside space-y-1 text-gray-600">
@@ -194,7 +208,7 @@ const Uttarakhand = () => {
 						)}
 					</ul>
 				</div>
-			</div>
+			</aside>
 		</div>
 	);
 };

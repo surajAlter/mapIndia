@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const WestBengal = () => {
 	const districts = [
@@ -24,45 +25,63 @@ const WestBengal = () => {
 	};
 
 	const [selectedDistrict, setSelectedDistrict] = useState("Kolkata");
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
-		<div className="flex flex-col md:flex-row px-4 sm:px-10 md:px-20 py-10 text-[#333] gap-10">
-			{/* Left Sidebar: District List */}
-			<div className="md:w-1/4 w-full bg-gray-100 rounded-lg shadow-md p-4 h-fit sticky top-10">
-				<h2 className="text-xl font-bold mb-4 text-[#2E3A59]">
+		<div className="flex flex-col md:flex-row min-h-screen bg-[#f9fafb] text-[#333]">
+			{/* Mobile menu button */}
+			<div className="md:hidden bg-white p-4 flex justify-between items-center shadow-md sticky top-0 z-20">
+				<h1 className="text-xl font-bold text-amber-600">
+					West Bengal
+				</h1>
+				<button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+					{isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+				</button>
+			</div>
+
+			{/* Sidebar */}
+			<aside
+				className={`md:w-64 bg-white border-r px-4 py-6 shadow-sm z-10 transition-all duration-300 ${
+					isMenuOpen ? "block" : "hidden"
+				} md:block`}
+			>
+				<h2 className="text-2xl font-bold mb-4 text-[#2E3A59]">
 					Districts
 				</h2>
 				<ul className="space-y-2">
 					{districts.map((district) => (
 						<li
 							key={district}
-							className={`cursor-pointer px-3 py-2 rounded-md ${
+							className={`cursor-pointer px-3 py-2 rounded-lg transition-all duration-300 ${
 								selectedDistrict === district
 									? "bg-amber-600 text-white font-semibold"
 									: "hover:bg-amber-100"
 							}`}
-							onClick={() => setSelectedDistrict(district)}
+							onClick={() => {
+								setSelectedDistrict(district);
+								setIsMenuOpen(false);
+							}}
 						>
 							{district}
 						</li>
 					))}
 				</ul>
-			</div>
+			</aside>
 
-			{/* Center Content Area */}
-			<div className="md:w-2/4 w-full space-y-10">
+			{/* Main Content */}
+			<main className="flex-1 px-6 py-10">
 				{/* Image */}
-				<div className="w-full h-64 sm:h-96">
+				<div className="mb-10">
 					<img
 						src={require("../../assets/State/WestBengal/WestBengal.jpg")}
 						alt="West Bengal"
-						className="w-full h-full object-contain rounded-lg shadow-md"
+						className="w-full max-w-4xl mx-auto rounded-3xl shadow-xl transition duration-300"
 					/>
 				</div>
 
-				{/* State Info Section */}
-				<section>
-					<h1 className="text-4xl font-bold text-[#2E3A59] mb-4">
+				{/* State Info */}
+				<section className="max-w-4xl mx-auto space-y-6">
+					<h1 className="text-4xl font-bold text-[#2E3A59]">
 						West Bengal
 					</h1>
 					<p className="text-lg leading-7">
@@ -73,163 +92,16 @@ const WestBengal = () => {
 					</p>
 				</section>
 
-				{/* Quick Facts */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Quick Facts
+				{/* District Info */}
+				<section className="max-w-4xl mx-auto mt-10 border-t pt-6">
+					<h2 className="text-3xl font-semibold text-amber-600 mb-2">
+						{selectedDistrict} District Details
 					</h2>
-					<ul className="list-disc list-inside space-y-1">
-						<li>
-							<strong>Capital:</strong> Kolkata
-						</li>
-						<li>
-							<strong>Area:</strong> 88,752 sq km
-						</li>
-						<li>
-							<strong>Population:</strong> ~91 million (2011
-							Census)
-						</li>
-						<li>
-							<strong>Official Language:</strong> Bengali, English
-						</li>
-					</ul>
-				</section>
-
-				{/* Tourism */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Tourism
-					</h2>
-					<p className="text-lg leading-7 mb-2">
-						West Bengal offers an eclectic mix of cultural,
-						historical, and natural attractions.
-					</p>
-					<ul className="list-disc list-inside space-y-1">
-						<li>Victoria Memorial & Howrah Bridge</li>
-						<li>Tea Gardens of Darjeeling</li>
-						<li>Sundarbans Mangroves</li>
-					</ul>
-				</section>
-
-				{/* Geography & Climate */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Geography & Climate
-					</h2>
-					<p className="text-lg leading-7">
-						Ranging from fertile plains to high hill regions, West
-						Bengal experiences a tropical wet-dry climate in the
-						plains and a temperate climate in the hills.
+					<p className="text-lg text-gray-700">
+						{districtInfo[selectedDistrict]}
 					</p>
 				</section>
-
-				{/* Transport */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Transport
-					</h2>
-					<div className="grid md:grid-cols-2 gap-4">
-						<div>
-							<h3 className="font-semibold text-lg">Air</h3>
-							<ul className="list-disc list-inside">
-								<li>
-									Netaji Subhas Chandra Bose International
-									Airport, Kolkata
-								</li>
-							</ul>
-						</div>
-						<div>
-							<h3 className="font-semibold text-lg">Rail</h3>
-							<ul className="list-disc list-inside">
-								<li>Kolkata and Howrah Railway Stations</li>
-								<li>Extensive suburban rail system</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-
-				{/* Government */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Government
-					</h2>
-					<ul className="list-disc list-inside">
-						<li>Unicameral Legislature</li>
-						<li>Divided into multiple administrative districts</li>
-					</ul>
-				</section>
-			</div>
-
-			{/* Right Sidebar: District Info */}
-			<div className="md:w-1/4 w-full bg-white rounded-lg shadow-md p-6 h-fit sticky top-10">
-				<h2 className="text-2xl font-bold mb-4 text-[#2E3A59] border-b pb-2">
-					{selectedDistrict} District
-				</h2>
-				<p className="text-lg leading-relaxed text-gray-700">
-					{districtInfo[selectedDistrict]}
-				</p>
-				<div className="mt-6">
-					<h3 className="text-lg font-semibold mb-2">Key Features</h3>
-					<ul className="list-disc list-inside space-y-1 text-gray-600">
-						{selectedDistrict === "Kolkata" && (
-							<>
-								<li>Cultural Hotspots</li>
-								<li>Colonial Architecture</li>
-								<li>Literary Heritage</li>
-							</>
-						)}
-						{selectedDistrict === "Howrah" && (
-							<>
-								<li>Major Railway Junction</li>
-								<li>Industrial Hubs</li>
-								<li>Riverfront Areas</li>
-							</>
-						)}
-						{selectedDistrict === "Darjeeling" && (
-							<>
-								<li>Tea Gardens</li>
-								<li>Himalayan Views</li>
-								<li>Heritage Railway</li>
-							</>
-						)}
-						{selectedDistrict === "Siliguri" && (
-							<>
-								<li>Gateway to the Northeast</li>
-								<li>Vibrant Markets</li>
-								<li>Transport Hub</li>
-							</>
-						)}
-						{selectedDistrict === "Durgapur" && (
-							<>
-								<li>Industrial Infrastructure</li>
-								<li>Modern Developments</li>
-								<li>Urban Planning</li>
-							</>
-						)}
-						{selectedDistrict === "Asansol" && (
-							<>
-								<li>Coal Mining</li>
-								<li>Steel Production</li>
-								<li>Working-class Culture</li>
-							</>
-						)}
-						{selectedDistrict === "Burdwan" && (
-							<>
-								<li>Historical Significance</li>
-								<li>Agricultural Richness</li>
-								<li>Cultural Festivals</li>
-							</>
-						)}
-						{selectedDistrict === "Kharagpur" && (
-							<>
-								<li>Academic Excellence</li>
-								<li>Technological Hub</li>
-								<li>Innovative Spirit</li>
-							</>
-						)}
-					</ul>
-				</div>
-			</div>
+			</main>
 		</div>
 	);
 };

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import manipurMap from '../../assets/State/Manipur/Manipur.jpg';
 
 const Manipur = () => {
   const [selectedCity, setSelectedCity] = useState('Imphal');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const cities = [
     'Imphal',
@@ -33,41 +34,57 @@ Manipur is paradise on earth. It literally means "The Jeweled Land". Manipur is 
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#f9fafb] text-[#333]">
+      {/* Mobile menu button */}
+      <div className="md:hidden bg-white p-4 flex justify-between items-center shadow-md sticky top-0 z-20">
+        <h1 className="text-xl font-bold text-green-600">Manipur</h1>
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <div className="w-1/4 bg-gray-100 p-6 shadow-md">
-        <h2 className="text-xl font-bold mb-4">Cities of Manipur</h2>
-        <ul>
-          {cities.map(city => (
+      <aside
+        className={`md:w-64 bg-white border-r px-4 py-6 shadow-sm z-10 transition-all duration-300 ${
+          isMenuOpen ? 'block' : 'hidden'
+        } md:block`}
+      >
+        <h2 className="text-2xl font-bold mb-4 text-[#0f172a]">Cities of Manipur</h2>
+        <ul className="space-y-2">
+          {cities.map((city) => (
             <li
               key={city}
-              className={`cursor-pointer p-2 mb-2 rounded hover:bg-blue-200 ${
-                selectedCity === city ? 'bg-blue-500 text-white' : 'bg-white text-black'
+              className={`cursor-pointer px-3 py-2 rounded-lg transition-all duration-300 ${
+                selectedCity === city
+                  ? 'bg-green-600 text-white font-semibold'
+                  : 'hover:bg-green-100'
               }`}
-              onClick={() => setSelectedCity(city)}
+              onClick={() => {
+                setSelectedCity(city);
+                setIsMenuOpen(false); // Close menu when city is selected on mobile
+              }}
             >
               {city}
             </li>
           ))}
         </ul>
-      </div>
+      </aside>
 
-      {/* Content Area */}
-      <div className="flex-1 p-8 overflow-y-auto">
-        <img
-          src={manipurMap}
-          alt="Manipur Map"
-          className="w-full h-96 object-cover rounded-2xl shadow mb-8"
-        />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="text-3xl font-bold mb-4">{selectedCity}</h1>
-          <p className="text-lg whitespace-pre-line">{cityContent[selectedCity]}</p>
-        </motion.div>
-      </div>
+      {/* Main Content */}
+      <main className="flex-1 px-6 py-10 overflow-y-auto">
+        <div className="mb-10">
+          <img
+            src={manipurMap}
+            alt="Manipur"
+            className="w-full max-w-4xl mx-auto rounded-3xl shadow-xl transition duration-300"
+          />
+        </div>
+
+        <section className="max-w-4xl mx-auto space-y-6">
+          <h1 className="text-4xl font-bold text-[#0f172a]">{selectedCity}</h1>
+          <p className="text-lg leading-7">{cityContent[selectedCity]}</p>
+        </section>
+      </main>
     </div>
   );
 };

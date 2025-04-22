@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 import biharImage from "../../assets/State/Bihar/Bihar.jpg";
 
 const cities = [
@@ -10,66 +11,116 @@ const cities = [
   "Purnia",
   "Arrah",
   "Begusarai",
-  "Katihar"
+  "Katihar",
 ];
 
-const Bihar = () => {
+const BiharComponent = () => {
+  const [selectedCity, setSelectedCity] = useState(cities[0]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div className="flex">
-      <aside className="w-64 h-full bg-gray-100 p-4 border-r">
-        <h2 className="text-xl font-semibold mb-4">Cities</h2>
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#f9fafb] text-[#333]">
+      {/* Mobile menu button */}
+      <div className="md:hidden bg-white p-4 flex justify-between items-center shadow-md sticky top-0 z-20">
+        <h1 className="text-xl font-bold text-orange-600">Bihar</h1>
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* Sidebar */}
+      <aside
+        className={`md:w-64 bg-white border-r px-4 py-6 shadow-sm z-10 transition-all duration-300 ${
+          isMenuOpen ? "block" : "hidden"
+        } md:block`}
+      >
+        <h2 className="text-2xl font-bold mb-4 text-[#0f172a]">Cities</h2>
         <ul className="space-y-2">
           {cities.map((city) => (
-            <li key={city} className="hover:underline cursor-pointer">
+            <li
+              key={city}
+              className={`cursor-pointer px-3 py-2 rounded-lg transition-all duration-300 ${
+                selectedCity === city
+                  ? "bg-orange-600 text-white font-semibold"
+                  : "hover:bg-orange-100"
+              }`}
+              onClick={() => {
+                setSelectedCity(city);
+                setIsMenuOpen(false);
+              }}
+            >
               {city}
             </li>
           ))}
         </ul>
       </aside>
-      <main className="p-6 max-w-5xl mx-auto">
-        <img
-          src={biharImage}
-          alt="Bihar"
-          className="w-2/3 h-auto rounded-2xl shadow-md mb-6 mx-auto"
-        />
-        <h1 className="text-3xl font-bold mb-4">Bihar</h1>
-        <p className="mb-4">
-          The ancient name of Bihar was "Vihara" which means monastery. It is located in the eastern part of India. Area wise Bihar is the thirteenth largest state and the third most populated state in India. The flora and fauna of this state is enriched by the river Ganges that flows through Bihar before getting distributed in Bengal's deltoid zone. Bihar also has a vast forest land that covers an area of 6,764 km².
-        </p>
-        <h2 className="text-2xl font-semibold mb-2">Capital</h2>
-        <p className="mb-4">Patna</p>
-        <h2 className="text-2xl font-semibold mb-2">Districts</h2>
-        <p className="mb-4">38</p>
-        <h2 className="text-2xl font-semibold mb-2">Key Attractions</h2>
-        <ul className="list-disc pl-5 mb-4">
-          <li>Bodhgaya and Mahabodhi Temple</li>
-          <li>Ruins of Nalanda</li>
-          <li>Stupa in Rajgir</li>
-          <li>Lion Pillars at Vaishali</li>
-          <li>Emperor Sher Shah Suri's Mausoleum</li>
-          <li>Navlakha Palace Ruins</li>
-          <li>World Peace Pagoda</li>
-          <li>Royal Bhutan Monastery</li>
-        </ul>
-        <h2 className="text-2xl font-semibold mb-2">Culture and People</h2>
-        <p className="mb-4">
-          Bihar is the birthplace of Gautam Buddha and Lord Mahavira. Festivals like Chhath Puja and Sama Chakeva are unique to the region. The state is rich in folk music and dance traditions such as Sohar, Sumangali, Katnigeet, and Ropnigeet. Popular folk dances include gond naach, dhobi naach, and jhumar naach.
-        </p>
-        <h2 className="text-2xl font-semibold mb-2">Economy</h2>
-        <p className="mb-4">
-          The economy has shown substantial growth in recent years. Development with justice was a key motto leading to progress. The state is reducing the per capita income gap with the rest of India steadily.
-        </p>
-        <h2 className="text-2xl font-semibold mb-2">Transportation</h2>
-        <p className="mb-4">
-          Bihar has 29 national highways and several state highways. Patna, Muzaffarpur, Darbhanga, and Gaya are key railway hubs. Bus services and car rentals like EazeeCab also support intra-state travel.
-        </p>
-        <h2 className="text-2xl font-semibold mb-2">Languages</h2>
-        <p className="mb-4">
-          Major languages include Hindi, Bhojpuri, Maithili, Magahi, Angika, and Bajjika. Hindi is the official language, while Urdu is also widely used.
-        </p>
+
+      {/* Main content */}
+      <main className="flex-1 px-6 py-10">
+        <div className="mb-10">
+          <img
+            src={biharImage}
+            alt="Bihar"
+            className="w-full max-w-4xl mx-auto rounded-3xl shadow-xl transition duration-300"
+          />
+        </div>
+
+        <section className="max-w-4xl mx-auto space-y-6 text-justify">
+          <h1 className="text-4xl font-bold text-[#0f172a]">Bihar</h1>
+          <p className="text-lg leading-7">
+            Bihar—ancient “Vihara” (monastery)—sits in eastern India. It’s the thirteenth largest state by area and third most populous. Enriched by the Ganges and vast forests, Bihar blends history with rapid growth.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Capital</h2>
+              <p>Patna</p>
+            </div>
+            <div>
+              <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Districts</h2>
+              <p>38</p>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Key Attractions</h2>
+            <ul className="list-disc pl-5">
+              <li>Bodhgaya & Mahabodhi Temple</li>
+              <li>Nalanda Ruins</li>
+              <li>Rajgir Stupa</li>
+              <li>Vaishali Pillars</li>
+              <li>Sher Shah Suri Mausoleum</li>
+              <li>World Peace Pagoda</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Culture & Economy</h2>
+            <p>
+              Birthplace of Buddha & Mahavira, Bihar celebrates Chhath and rich folk arts. Agriculture and development accelerate its per‑capita growth.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Transport & Languages</h2>
+            <p>
+              Extensive rail, road, and river networks connect Patna, Gaya, and Darbhanga. Hindi, Bhojpuri, Maithili, and Urdu are widely spoken.
+            </p>
+          </div>
+        </section>
+
+        {/* Selected City Info */}
+        <section className="max-w-4xl mx-auto mt-10 border-t pt-6">
+          <h2 className="text-3xl font-semibold text-orange-600 mb-2">
+            {selectedCity}
+          </h2>
+          <p className="text-lg text-gray-700">
+            More detailed info about <strong>{selectedCity}</strong> coming soon!
+          </p>
+        </section>
       </main>
     </div>
   );
 };
 
-export default Bihar;
+export default BiharComponent;

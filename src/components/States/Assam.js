@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 import assamImage from "../../assets/State/Assam/Assam.jpg";
 
 const cities = [
@@ -10,66 +11,111 @@ const cities = [
   "Nagaon",
   "Tinsukia",
   "Goalpara",
-  "Barpeta"
+  "Barpeta",
 ];
 
-const Assam = () => {
+const AssamComponent = () => {
+  const [selectedCity, setSelectedCity] = useState(cities[0]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div className="flex">
-      <aside className="w-64 h-full bg-gray-100 p-4 border-r">
-        <h2 className="text-xl font-semibold mb-4">Cities</h2>
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#f9fafb] text-[#333]">
+      {/* Mobile menu button */}
+      <div className="md:hidden bg-white p-4 flex justify-between items-center shadow-md sticky top-0 z-20">
+        <h1 className="text-xl font-bold text-orange-600">Assam</h1>
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* Sidebar */}
+      <aside
+        className={`md:w-64 bg-white border-r px-4 py-6 shadow-sm z-10 transition-all duration-300 ${
+          isMenuOpen ? "block" : "hidden"
+        } md:block`}
+      >
+        <h2 className="text-2xl font-bold mb-4 text-[#0f172a]">Cities</h2>
         <ul className="space-y-2">
           {cities.map((city) => (
-            <li key={city} className="hover:underline cursor-pointer">
+            <li
+              key={city}
+              className={`cursor-pointer px-3 py-2 rounded-lg transition-all duration-300 ${
+                selectedCity === city
+                  ? "bg-orange-600 text-white font-semibold"
+                  : "hover:bg-orange-100"
+              }`}
+              onClick={() => {
+                setSelectedCity(city);
+                setIsMenuOpen(false);
+              }}
+            >
               {city}
             </li>
           ))}
         </ul>
       </aside>
-      <main className="p-6 max-w-5xl mx-auto">
-        <img
-          src={assamImage}
-          alt="Assam"
-          className="w-2/3 h-auto rounded-2xl shadow-md mb-6 mx-auto"
-        />
-        <h1 className="text-3xl font-bold mb-4">Assam</h1>
-        <p className="mb-4">
-          Assam, located in northeastern India, is known for its rich culture, biodiversity, and tea plantations. It is bordered by Bhutan and Arunachal Pradesh to the north and Nagaland and Manipur to the east.
-        </p>
-        <h2 className="text-2xl font-semibold mb-2">Capital</h2>
-        <p className="mb-4">Dispur</p>
-        <h2 className="text-2xl font-semibold mb-2">Districts</h2>
-        <ul className="list-disc pl-5 mb-4">
-          <li>Kamrup Metropolitan</li>
-          <li>Dibrugarh</li>
-          <li>Barpeta</li>
-          <li>Sonitpur</li>
-          <li>Cachar</li>
-          <li>Nagaon</li>
-        </ul>
-        <h2 className="text-2xl font-semibold mb-2">Key Attractions</h2>
-        <ul className="list-disc pl-5 mb-4">
-          <li>Kaziranga National Park</li>
-          <li>Majuli Island</li>
-          <li>Kamakhya Temple</li>
-          <li>Manas National Park</li>
-          <li>Sivasagar</li>
-        </ul>
-        <h2 className="text-2xl font-semibold mb-2">Culture and People</h2>
-        <p className="mb-4">
-          Assam is home to a diverse population comprising various ethnic groups and communities. The state celebrates vibrant festivals like Bihu, and the traditional Assamese attire and dance forms are integral to its culture.
-        </p>
-        <h2 className="text-2xl font-semibold mb-2">Economy</h2>
-        <p className="mb-4">
-          The state's economy is driven by agriculture, especially tea cultivation, oil and natural gas, and tourism. Guwahati serves as the commercial and industrial hub.
-        </p>
-        <h2 className="text-2xl font-semibold mb-2">Transportation</h2>
-        <p className="mb-4">
-          Assam has a well-connected transport system with railways, roadways, and airways. The Brahmaputra River also provides inland water transport.
-        </p>
+
+      {/* Main content */}
+      <main className="flex-1 px-6 py-10">
+        <div className="mb-10">
+          <img
+            src={assamImage}
+            alt="Assam"
+            className="w-full max-w-4xl mx-auto rounded-3xl shadow-xl transition duration-300"
+          />
+        </div>
+
+        <section className="max-w-4xl mx-auto space-y-6 text-justify">
+          <h1 className="text-4xl font-bold text-[#0f172a]">Assam</h1>
+          <p className="text-lg leading-7">
+            Assam, located in northeastern India, is known for its rich culture, biodiversity, and tea plantations.
+            It is bordered by Bhutan and Arunachal Pradesh to the north and Nagaland and Manipur to the east.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Capital</h2>
+              <p>Dispur</p>
+            </div>
+            <div>
+              <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Key Attractions</h2>
+              <ul className="list-disc pl-5">
+                <li>Kaziranga National Park</li>
+                <li>Majuli Island</li>
+                <li>Kamakhya Temple</li>
+                <li>Manas National Park</li>
+                <li>Sivasagar</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Culture & Economy</h2>
+            <p>
+              Assam’s vibrant festivals like Bihu, diverse folk dances, and tea economy drive both tourism and local livelihoods.
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold text-[#0f172a] mb-2">Transportation</h2>
+            <p>
+              Well-connected by rail, road, air (Guwahati airport), and river transport on the Brahmaputra.
+            </p>
+          </div>
+        </section>
+
+        {/* Selected City Info */}
+        <section className="max-w-4xl mx-auto mt-10 border-t pt-6">
+          <h2 className="text-3xl font-semibold text-orange-600 mb-2">
+            {selectedCity}
+          </h2>
+          <p className="text-lg text-gray-700">
+            Explore more about <strong>{selectedCity}</strong> on our site soon!
+          </p>
+        </section>
       </main>
     </div>
   );
 };
 
-export default Assam;
+export default AssamComponent;

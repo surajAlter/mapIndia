@@ -1,37 +1,92 @@
-import React, { useState } from 'react';
-import keralaMap from '../../assets/State/Kerala/kerala.jpg';
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
+import keralaMap from "../../assets/State/Kerala/kerala.jpg";
 
 const districts = [
-  'Thiruvananthapuram',
-  'Kollam',
-  'Pathanamthitta',
-  'Alappuzha',
-  'Kottayam',
-  'Idukki',
-  'Ernakulam',
-  'Thrissur',
-  'Palakkad',
-  'Malappuram',
-  'Kozhikode',
-  'Wayanad',
-  'Kannur',
-  'Kasaragod'
+  "Thiruvananthapuram",
+  "Kollam",
+  "Pathanamthitta",
+  "Alappuzha",
+  "Kottayam",
+  "Idukki",
+  "Ernakulam",
+  "Thrissur",
+  "Palakkad",
+  "Malappuram",
+  "Kozhikode",
+  "Wayanad",
+  "Kannur",
+  "Kasaragod"
 ];
 
+const districtInfo = {
+  Thiruvananthapuram: "The capital city, known for beaches, temples, and the IT hub Technopark.",
+  Kollam: "Known for its cashew industry and beautiful backwaters.",
+  Pathanamthitta: "Famous for Sabarimala temple and eco-tourism.",
+  Alappuzha: "Often called the Venice of the East due to its scenic backwaters.",
+  Kottayam: "Renowned for literacy, rubber plantations, and publishing houses.",
+  Idukki: "A hilly district known for spice gardens, forests, and dams.",
+  Ernakulam: "Home to Kochi, the commercial capital and a major port city.",
+  Thrissur: "Cultural capital of Kerala, known for Thrissur Pooram and temples.",
+  Palakkad: "Known for the Palakkad Gap, dams, and rich agriculture.",
+  Malappuram: "A center of Islamic learning and rich cultural heritage.",
+  Kozhikode: "Historical seaport where Vasco da Gama landed in 1498.",
+  Wayanad: "A lush green district with wildlife sanctuaries and waterfalls.",
+  Kannur: "Known for handlooms, beaches, and traditional Theyyam rituals.",
+  Kasaragod: "Northernmost district, famous for forts, coir, and diverse culture."
+};
+
+const districtHighlights = {
+  Thiruvananthapuram: ["Kovalam Beach", "Padmanabhaswamy Temple", "Ponmudi Hills"],
+  Kollam: ["Ashtamudi Lake", "Thangassery Light House", "Palaruvi Waterfalls"],
+  Pathanamthitta: ["Sabarimala Temple", "Perunthenaruvi Falls", "Konni Elephant Camp"],
+  Alappuzha: ["Backwater Houseboats", "Alleppey Beach", "Ambalapuzha Temple"],
+  Kottayam: ["Vembanad Lake", "Kumarakom Bird Sanctuary", "Thazhathangady Juma Masjid"],
+  Idukki: ["Idukki Dam", "Munnar", "Thekkady"],
+  Ernakulam: ["Fort Kochi", "Marine Drive", "Lulu Mall"],
+  Thrissur: ["Vadakkunnathan Temple", "Athirapally Falls", "Thrissur Zoo"],
+  Palakkad: ["Silent Valley", "Malampuzha Dam", "Palakkad Fort"],
+  Malappuram: ["Kottakkunnu", "Teak Museum", "Nilambur Forests"],
+  Kozhikode: ["Kappad Beach", "Mananchira Square", "Sweet Street"],
+  Wayanad: ["Edakkal Caves", "Banasura Sagar Dam", "Wayanad Wildlife Sanctuary"],
+  Kannur: ["St. Angelo Fort", "Payyambalam Beach", "Parassinikadavu Temple"],
+  Kasaragod: ["Bekal Fort", "Chandragiri Fort", "Ananthapura Lake Temple"]
+};
+
 const Kerala = () => {
-  const [selectedDistrict, setSelectedDistrict] = useState('Thiruvananthapuram');
+  const [selectedDistrict, setSelectedDistrict] = useState("Thiruvananthapuram");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="flex max-w-6xl mx-auto p-6">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-[#f9fafb] text-[#2E3A59]">
+      {/* Mobile menu header */}
+      <div className="lg:hidden bg-white p-4 flex justify-between items-center shadow-md sticky top-0 z-20">
+        <h1 className="text-xl font-bold text-[#FFB703]">Kerala</h1>
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
       {/* Sidebar */}
-      <aside className="w-1/4 pr-6">
-        <h2 className="text-xl font-semibold mb-4">Districts</h2>
+      <aside
+        className={`lg:w-1/4 w-full bg-white rounded-2xl shadow-lg p-4 h-fit lg:block transition-all duration-300 ${
+          isMenuOpen ? "block" : "hidden"
+        }`}
+      >
+        <h2 className="text-xl font-bold mb-4">Districts</h2>
         <ul className="space-y-2">
           {districts.map((district) => (
             <li
               key={district}
-              className={`cursor-pointer px-3 py-2 rounded-lg hover:bg-blue-100 ${selectedDistrict === district ? 'bg-blue-200 font-semibold' : ''}`}
-              onClick={() => setSelectedDistrict(district)}
+              onClick={() => {
+                setSelectedDistrict(district);
+                setIsMenuOpen(false); // Close on mobile after selection
+              }}
+              className={`cursor-pointer px-3 py-2 rounded-xl transition-all ${
+                selectedDistrict === district
+                  ? "bg-[#FFB703] text-white font-semibold"
+                  : "hover:bg-[#FFE8B2]"
+              }`}
             >
               {district}
             </li>
@@ -39,60 +94,107 @@ const Kerala = () => {
         </ul>
       </aside>
 
-      {/* Main Content */}
-      <main className="w-3/4">
-        <h1 className="text-3xl font-bold mb-4 text-center">Kerala</h1>
+      {/* Main content */}
+      <main className="flex-1 px-6 py-10 space-y-10">
+        <div className="w-full h-64 sm:h-96">
+          <img
+            src={keralaMap}
+            alt="Kerala"
+            className="w-full h-full object-cover rounded-2xl shadow-md"
+          />
+        </div>
 
-        <img
-          src={keralaMap}
-          alt="Kerala Map"
-          className="rounded-lg shadow-md w-full mb-4"
-        />
-        <p className="text-sm italic text-center text-gray-500 mb-8">
-          Map showing major roads, railways, rivers, national highways, etc. <br />
-          Disclaimer: All efforts have been made to make this image accurate. However Mapping Digiworld Pvt Ltd and its directors do not own any responsibility for the correctness or authenticity of the same.
-        </p>
+        <section>
+          <h1 className="text-4xl font-bold mb-4">Kerala</h1>
+          <p className="text-lg leading-7">
+            Kerala, located on the southwestern coast of India, is famous for its serene backwaters,
+            lush landscapes, rich traditions, and high literacy. It's often called "God's Own Country."
+          </p>
+        </section>
 
-        <section className="space-y-6">
-          <div>
-            <h2 className="text-2xl font-semibold">About</h2>
-            <p>
-              Kerala is a state located on the southwestern coast of India. Known for its scenic backwaters, tropical greenery, and rich cultural traditions, Kerala is often referred to as "God's Own Country." The capital is Thiruvananthapuram, and Malayalam is the official language.
-            </p>
-            <p>
-              Kerala shares its borders with Karnataka and Tamil Nadu, and it has a long coastline along the Arabian Sea. The state is a major tourist destination, famous for Ayurveda, classical arts, temples, and festivals. According to the 2011 Census, Kerala has a population of about 3.34 crore.
-            </p>
-          </div>
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Quick Facts</h2>
+          <ul className="list-disc list-inside space-y-1 text-gray-700">
+            <li><strong>Capital:</strong> Thiruvananthapuram</li>
+            <li><strong>Formed:</strong> November 1, 1956</li>
+            <li><strong>Area:</strong> 38,863 sq km</li>
+            <li><strong>Population:</strong> ~33.4 million (2011)</li>
+            <li><strong>Languages:</strong> Malayalam, English, Tamil</li>
+            <li><strong>State Animal:</strong> Indian Elephant</li>
+            <li><strong>State Bird:</strong> Great Hornbill</li>
+            <li><strong>State Tree:</strong> Coconut Tree</li>
+            <li><strong>State Flower:</strong> Kanikonna (Golden Shower)</li>
+          </ul>
+        </section>
 
-          <div>
-            <h2 className="text-2xl font-semibold">Facts on Kerala</h2>
-            <ul className="list-disc list-inside">
-              <li>Official Website: www.kerala.gov.in</li>
-              <li>Date of Formation: Nov 1, 1956</li>
-              <li>Area: 38,863 sq km</li>
-              <li>Density: 860/Km²</li>
-              <li>Population (2011): 33,406,061</li>
-              <li>Males Population (2011): 16,027,412</li>
-              <li>Females Population (2011): 17,378,649</li>
-              <li>No. of Districts: 14</li>
-              <li>Capital: Thiruvananthapuram</li>
-              <li>Rivers: Periyar, Bharathappuzha, Pamba</li>
-              <li>Forests & National Parks: Periyar NP, Silent Valley NP, Eravikulam NP</li>
-              <li>Languages: Malayalam, English, Tamil</li>
-              <li>Neighbours: Karnataka, Tamil Nadu, Arabian Sea</li>
-              <li>State Animal: Indian Elephant</li>
-              <li>State Bird: Great Hornbill</li>
-              <li>State Tree: Coconut Tree</li>
-              <li>State Flower: Kanikonna (Golden Shower)</li>
-              <li>Net State Domestic Product (2011): ₹2,76,796 crore</li>
-              <li>Literacy Rate (2011): 94.00%</li>
-              <li>Females per 1000 males: 1084</li>
-              <li>Assembly constituencies: 140</li>
-              <li>Parliamentary constituencies: 20</li>
-            </ul>
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Tourism</h2>
+          <p className="text-lg leading-7 mb-2">
+            Kerala offers a wealth of attractions:
+          </p>
+          <ul className="list-disc list-inside space-y-1 text-gray-700">
+            <li>Alleppey Backwaters</li>
+            <li>Munnar Hills</li>
+            <li>Periyar Wildlife Sanctuary</li>
+            <li>Fort Kochi</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Geography & Climate</h2>
+          <p className="text-lg leading-7 text-gray-700">
+            Kerala features a tropical climate with a long coastline along the Arabian Sea,
+            and hilly regions in the Western Ghats, supporting rich biodiversity and scenic views.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Transport</h2>
+          <div className="grid md:grid-cols-2 gap-4 text-gray-700">
+            <div>
+              <h3 className="font-semibold text-lg">Air</h3>
+              <ul className="list-disc list-inside">
+                <li>Cochin International Airport</li>
+                <li>Trivandrum International Airport</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg">Rail</h3>
+              <ul className="list-disc list-inside">
+                <li>Well-connected railways across all districts</li>
+              </ul>
+            </div>
           </div>
         </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-3">Government</h2>
+          <ul className="list-disc list-inside text-gray-700">
+            <li>Legislative Assembly with 140 constituencies</li>
+            <li>14 districts for administrative purposes</li>
+            <li>High Court: Kerala High Court in Ernakulam</li>
+          </ul>
+        </section>
       </main>
+
+      {/* District Info Sidebar */}
+      <div className="lg:w-1/4 w-full bg-white rounded-2xl shadow-lg p-6 h-fit sticky top-10 hidden lg:block">
+        <h2 className="text-2xl font-bold mb-4 border-b pb-2">
+          {selectedDistrict}
+        </h2>
+        <p className="text-base text-gray-700 leading-relaxed">
+          {districtInfo[selectedDistrict]}
+        </p>
+
+        <div className="mt-6">
+          <h3 className="text-lg font-semibold mb-2">Highlights</h3>
+          <ul className="list-disc list-inside space-y-1 text-gray-600">
+            {(districtHighlights[selectedDistrict] || []).map((place) => (
+              <li key={place}>{place}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Logo from "../assets/image.jpg";
-import { FaSearch, FaAngleDown } from "react-icons/fa";
+import { FaSearch, FaAngleDown, FaBars } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -17,6 +17,7 @@ const Navbar = () => {
 	});
 
 	const [searchQuery, setSearchQuery] = useState("");
+	const [menuOpen, setMenuOpen] = useState(false);
 
 	const dropdownRefs = {
 		states: useRef(null),
@@ -91,85 +92,46 @@ const Navbar = () => {
 			{ text: "Haryana", path: "/states/haryana" },
 			{ text: "More...", path: "/states" },
 		],
-
-		cities: [
-			"Delhi",
-			"Mumbai",
-			"Kolkata",
-			"Chennai",
-			"Bangalore",
-			{ text: "More...", path: "/cities" },
-		],
 		maps: [
-			"Political Map",
-			"Physical Map",
-			"Outline Map",
-			"Railway Map",
-			"Road Map",
+			{ text: "Political Map", path: "/maps/political" },
+			{ text: "Physical Map", path: "/maps/physical" },
+			{ text: "Outline Map", path: "/maps/outline" },
+			{ text: "Railway Map", path: "/maps/railway" },
+			{ text: "Road Map", path: "/maps/road" },
+			{ text: "River Map", path: "/maps/river" },
+			{ text: "Climate Map", path: "/maps/climate" },
+			{ text: "Topographic Map", path: "/maps/topographic" },
+			{ text: "Soil Map", path: "/maps/soil" },
 			{ text: "More...", path: "/maps" },
 		],
-		indiaTravel: [
-			"Hotels in India",
-			"Tourist Places in India",
-			"Hill Stations",
-			"Beaches in India",
-			"Religious Places in India",
-			{ text: "More...", path: "/travel" },
-		],
-		myIndia: [
-			"Movie Reviews",
-			"Travel",
-			"Society",
-			"Government",
-			"Indian Food",
-			"Politics",
-			{ text: "More...", path: "/myindia" },
-		],
-		utilities: [
-			"Pin Codes",
-			"STD Search",
-			"Railway Time Table",
-			"Flight Schedule",
-			"Distance Calculator",
-			"IFSC Code",
-			{ text: "More...", path: "/utilities" },
-		],
-		ourChannel: [
-			"Education",
-			"Election",
-			"Sports",
-			"Bharat ka Manchitra",
-			{ text: "More...", path: "/ourchannel" },
-		],
-		whatsNew: [
-			"Upcoming Bollywood Movies",
-			"Fair and Festival in India",
-			"Events India",
-			"Biographies of Famous Personalities",
-			{ text: "More...", path: "/whatsnew" },
-		],
+		// indiaTravel: ["Hotels in India", "Tourist Places in India", "Coming Soon", "Beaches in India", "Religious Places in India", { text: "More...", path: "/travel" }],
+		// myIndia: ["Movie Reviews", "Travel", "Society", "Government", "Indian Food", "Politics", { text: "More...", path: "/myindia" }],
+		// utilities: ["Pin Codes", "STD Search", "Railway Time Table", "Flight Schedule", "Distance Calculator", "IFSC Code", { text: "More...", path: "/utilities" }],
+		// ourChannel: ["Education", "Election", "Sports", "Bharat ka Manchitra", { text: "More...", path: "/ourchannel" }],
+		// whatsNew: ["Upcoming Bollywood Movies", "Fair and Festival in India", "Events India", "Biographies of Famous Personalities", { text: "More...", path: "/whatsnew" }],
 	};
 
 	return (
 		<nav className="bg-white shadow-md">
-			<div className="flex justify-between items-center px-8 py-3 border-b">
+			{/* Topbar */}
+			<div className="flex flex-wrap justify-between items-center px-4 md:px-8 py-3 border-b gap-4">
 				<div className="flex items-center space-x-3">
 					<img
 						src={Logo}
 						alt="Maps of India"
-						className="h-12 rounded-md shadow-sm"
+						className="h-10 md:h-12 rounded-md shadow-sm"
 					/>
-					<span className="text-2xl font-bold text-red-600">
-						Maps<span className="text-blue-600">ofIndia</span>.com
+					<span className="text-xl md:text-2xl font-bold text-red-600">
+						Maps<span className="text-blue-600">Xplorer</span>.com
 					</span>
 				</div>
 
 				{/* Google Search */}
-				<div className="flex items-center bg-gray-100 border rounded-full px-4 py-2 space-x-2 shadow-sm">
+				<div className="flex items-center bg-gray-100 border rounded-full px-2 py-2 space-x-2 shadow-sm w-full md:w-auto">
 					<input
 						type="text"
 						placeholder="Search anything..."
-						className="outline-none bg-transparent w-64 text-sm px-2"
+						className="outline-none bg-transparent w-full md:w-64 text-sm px-2"
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
 						onKeyDown={handleKeyPress}
@@ -181,12 +143,27 @@ const Navbar = () => {
 						<FaSearch />
 					</button>
 				</div>
+
+				{/* Hamburger for Mobile */}
+				<div className="md:hidden">
+					<button
+						onClick={() => setMenuOpen(!menuOpen)}
+						className="text-2xl"
+					>
+						<FaBars />
+					</button>
+				</div>
 			</div>
 
-			<div className="bg-blue-600 text-white text-sm flex px-8 relative z-10">
+			{/* Menu Bar */}
+			<div
+				className={`bg-blue-600 text-white text-sm md:flex ${
+					menuOpen ? "block" : "hidden"
+				} md:px-8`}
+			>
 				<a
 					href="/"
-					className="px-5 py-3 hover:bg-blue-700 transition-all font-bold"
+					className="block px-5 py-3 hover:bg-blue-700 transition-all font-bold"
 				>
 					Home
 				</a>
@@ -199,15 +176,15 @@ const Navbar = () => {
 							{key.replace(/([A-Z])/g, " $1").trim()}{" "}
 							<FaAngleDown />
 						</button>
+
+						{/* Dropdown Menu */}
 						{dropdowns[key] && (
-							<div className="absolute left-0 mt-2 w-64 bg-white text-black shadow-lg rounded-lg overflow-hidden z-20 border">
+							<div className="absolute left-0 mt-2 w-64 bg-white text-black shadow-lg rounded-lg overflow-hidden z-50 border animate-fade-in-down">
 								{dropdownItems[key].map((item, index) =>
 									typeof item === "string" ? (
 										<a
 											key={index}
-											href={`/${key}/${item
-												.split(" ")[0]
-												.toLowerCase()}`}
+											href="#"
 											className="block px-4 py-2 hover:bg-gray-200 transition-all"
 										>
 											{item}
@@ -228,14 +205,15 @@ const Navbar = () => {
 				))}
 			</div>
 
-			<div className="px-8 py-3 text-sm text-red-600 bg-gray-100 border-t">
+			{/* Bottom Contact Bar */}
+			<div className="px-4 md:px-8 py-3 text-sm text-red-600 bg-gray-100 border-t text-center">
 				For Custom/Business Map Quote{" "}
 				<span className="font-bold">+91 8929683196</span> |
 				<a
-					href="mailto:apoorv@mappingdigiworld.com"
-					className="text-blue-600 underline"
+					href="mailto:saurabh@businesbasket.com"
+					className="text-blue-600 underline ml-2"
 				>
-					apoorv@mappingdigiworld.com
+					saurabh@businessbasket.com
 				</a>
 			</div>
 		</nav>
@@ -243,3 +221,9 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// indiaTravel: ["Hotels in India", "Tourist Places in India", "Coming Soon", "Beaches in India", "Religious Places in India", { text: "More...", path: "/travel" }],
+// myIndia: ["Movie Reviews", "Travel", "Society", "Government", "Indian Food", "Politics", { text: "More...", path: "/myindia" }],
+// utilities: ["Pin Codes", "STD Search", "Railway Time Table", "Flight Schedule", "Distance Calculator", "IFSC Code", { text: "More...", path: "/utilities" }],
+// ourChannel: ["Education", "Election", "Sports", "Bharat ka Manchitra", { text: "More...", path: "/ourchannel" }],
+// whatsNew: ["Upcoming Bollywood Movies", "Fair and Festival in India", "Events India", "Biographies of Famous Personalities", { text: "More...", path: "/whatsnew" }],

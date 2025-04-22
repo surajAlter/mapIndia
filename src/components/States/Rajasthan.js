@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
+import rajasthanMap from "../../assets/State/Rajasthan/Rajasthan.jpg";
 
 const Rajasthan = () => {
 	const districts = [
@@ -40,44 +42,60 @@ const Rajasthan = () => {
 	};
 
 	const [selectedDistrict, setSelectedDistrict] = useState("Jaipur");
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	return (
-		<div className="flex flex-col md:flex-row px-4 sm:px-10 md:px-20 py-10 text-[#333] gap-10">
-			{/* Left Sidebar: District List */}
-			<div className="md:w-1/4 w-full bg-gray-100 rounded-lg shadow-md p-4 h-fit sticky top-10">
-				<h2 className="text-xl font-bold mb-4 text-[#2E3A59]">
+		<div className="flex flex-col md:flex-row min-h-screen bg-[#f9fafb] text-[#333]">
+			{/* Mobile menu button */}
+			<div className="md:hidden bg-white p-4 flex justify-between items-center shadow-md sticky top-0 z-20">
+				<h1 className="text-xl font-bold text-amber-600">Rajasthan</h1>
+				<button onClick={() => setIsMenuOpen(!isMenuOpen)}>
+					{isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+				</button>
+			</div>
+
+			{/* Sidebar for districts */}
+			<aside
+				className={`md:w-64 bg-white border-r px-4 py-6 shadow-sm z-10 transition-all duration-300 ${
+					isMenuOpen ? "block" : "hidden"
+				} md:block`}
+			>
+				<h2 className="text-2xl font-bold mb-4 text-[#2E3A59]">
 					Districts
 				</h2>
 				<ul className="space-y-2">
 					{districts.map((district) => (
 						<li
 							key={district}
-							className={`cursor-pointer px-3 py-2 rounded-md ${
+							className={`cursor-pointer px-3 py-2 rounded-md transition-all duration-300 ${
 								selectedDistrict === district
 									? "bg-amber-600 text-white font-semibold"
 									: "hover:bg-amber-100"
 							}`}
-							onClick={() => setSelectedDistrict(district)}
+							onClick={() => {
+								setSelectedDistrict(district);
+								setIsMenuOpen(false);
+							}}
 						>
 							{district}
 						</li>
 					))}
 				</ul>
-			</div>
+			</aside>
 
-			{/* Center Content Area */}
-			<div className="md:w-2/4 w-full space-y-10">
+			{/* Main content */}
+			<main className="flex-1 px-6 py-10 space-y-10">
 				{/* Image */}
-				<div className="w-full h-64 sm:h-96">
+				<div className="w-full max-w-4xl mx-auto">
 					<img
-						src={require("../../assets/State/Rajasthan/Rajasthan.jpg")}
+						src={rajasthanMap}
 						alt="Rajasthan"
-						className="w-full h-full object-cover rounded-lg shadow-md"
+						className="w-full h-auto rounded-xl shadow-md"
 					/>
 				</div>
 
-				{/* All State Info Sections */}
-				<section>
+				{/* Intro */}
+				<section className="max-w-4xl mx-auto">
 					<h1 className="text-4xl font-bold text-[#2E3A59] mb-4">
 						Rajasthan
 					</h1>
@@ -90,182 +108,46 @@ const Rajasthan = () => {
 					</p>
 				</section>
 
-				{/* Quick Facts */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Quick Facts
+				{/* Selected District Info */}
+				<section className="max-w-4xl mx-auto border-t pt-6">
+					<h2 className="text-3xl font-semibold text-amber-600 mb-2">
+						{selectedDistrict} District
 					</h2>
-					<ul className="list-disc list-inside space-y-1">
-						<li>
-							<strong>Capital:</strong> Jaipur
-						</li>
-						<li>
-							<strong>Area:</strong> 342,239 sq km
-						</li>
-						<li>
-							<strong>Population:</strong> 68.5 million (2011
-							Census)
-						</li>
-						<li>
-							<strong>Official Language:</strong> Hindi
-						</li>
-						<li>
-							<strong>State Animal:</strong> Chinkara
-						</li>
-						<li>
-							<strong>State Bird:</strong> Great Indian Bustard
-						</li>
-					</ul>
-				</section>
-
-				{/* Tourism */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Tourism
-					</h2>
-					<p className="text-lg leading-7 mb-2">
-						Rajasthan's royal legacy comes alive through its:
+					<p className="text-lg text-gray-700">
+						{districtInfo[selectedDistrict]}
 					</p>
-					<ul className="list-disc list-inside space-y-1">
-						<li>Amber Fort & Jaipur City Palace</li>
-						<li>Udaipur's Lake Pichola</li>
-						<li>Jaisalmer Desert Festival</li>
-						<li>Ranthambore Tiger Reserve</li>
-						<li>Pushkar Camel Fair</li>
-						<li>Mehrangarh Fort in Jodhpur</li>
-					</ul>
-				</section>
 
-				{/* Geography */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Geography & Climate
-					</h2>
-					<p className="text-lg leading-7">
-						Features the Thar Desert and Aravalli Range. Climate
-						varies from:
-					</p>
-					<ul className="list-disc list-inside mt-2">
-						<li>Summer (Apr-Jun): 25°C to 48°C</li>
-						<li>Winter (Dec-Feb): 8°C to 28°C</li>
-						<li>Annual Rainfall: 200-400 mm</li>
-					</ul>
-				</section>
-
-				{/* Culture & Society */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Culture & Society
-					</h2>
-					<div className="grid md:grid-cols-2 gap-4 mt-4">
-						<div>
-							<h3 className="font-semibold text-lg">Festivals</h3>
-							<ul className="list-disc list-inside">
-								<li>Gangaur Festival</li>
-								<li>Teej Celebrations</li>
-								<li>Desert Festival</li>
-							</ul>
-						</div>
-						<div>
-							<h3 className="font-semibold text-lg">Arts</h3>
-							<ul className="list-disc list-inside">
-								<li>Kathputli Puppetry</li>
-								<li>Ghoomar Dance</li>
-								<li>Miniature Paintings</li>
-							</ul>
-						</div>
+					{/* Key features for some districts */}
+					<div className="mt-6">
+						<h3 className="text-lg font-semibold mb-2">
+							Key Features
+						</h3>
+						<ul className="list-disc list-inside space-y-1 text-gray-600">
+							{selectedDistrict === "Jaipur" && (
+								<>
+									<li>Amber Fort</li>
+									<li>Hawa Mahal</li>
+									<li>Jantar Mantar</li>
+								</>
+							)}
+							{selectedDistrict === "Jodhpur" && (
+								<>
+									<li>Mehrangarh Fort</li>
+									<li>Umaid Bhawan Palace</li>
+									<li>Clock Tower Market</li>
+								</>
+							)}
+							{selectedDistrict === "Udaipur" && (
+								<>
+									<li>City Palace</li>
+									<li>Lake Pichola</li>
+									<li>Jag Mandir</li>
+								</>
+							)}
+						</ul>
 					</div>
 				</section>
-
-				{/* Education */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Education
-					</h2>
-					<ul className="list-disc list-inside space-y-1">
-						<li>Literacy Rate: 66.1% (2011 Census)</li>
-						<li>
-							Notable Institutions:
-							<ul className="list-[circle] list-inside ml-4">
-								<li>IIT Jodhpur</li>
-								<li>MNIT Jaipur</li>
-								<li>Central University of Rajasthan</li>
-							</ul>
-						</li>
-					</ul>
-				</section>
-
-				{/* Transport */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Transport
-					</h2>
-					<div className="grid md:grid-cols-2 gap-4">
-						<div>
-							<h3 className="font-semibold text-lg">Air</h3>
-							<ul className="list-disc list-inside">
-								<li>International Airport: Jaipur</li>
-								<li>Domestic Airports: Jodhpur, Udaipur</li>
-							</ul>
-						</div>
-						<div>
-							<h3 className="font-semibold text-lg">Rail</h3>
-							<ul className="list-disc list-inside">
-								<li>Major Junctions: Jaipur, Jodhpur, Kota</li>
-								<li>Palace on Wheels Luxury Train</li>
-							</ul>
-						</div>
-					</div>
-				</section>
-
-				{/* Government */}
-				<section className="mb-10">
-					<h2 className="text-2xl font-semibold text-[#2E3A59] mb-3">
-						Government
-					</h2>
-					<ul className="list-disc list-inside">
-						<li>Unicameral Legislature (200 seats)</li>
-						<li>Administrative Divisions: 7 divisions</li>
-						<li>High Court: Rajasthan High Court (Jodhpur)</li>
-					</ul>
-				</section>
-			</div>
-
-			{/* Right Sidebar: District Info */}
-			<div className="md:w-1/4 w-full bg-white rounded-lg shadow-md p-6 h-fit sticky top-10">
-				<h2 className="text-2xl font-bold mb-4 text-[#2E3A59] border-b pb-2">
-					{selectedDistrict} District
-				</h2>
-				<p className="text-lg leading-relaxed text-gray-700">
-					{districtInfo[selectedDistrict]}
-				</p>
-				<div className="mt-6">
-					<h3 className="text-lg font-semibold mb-2">Key Features</h3>
-					<ul className="list-disc list-inside space-y-1 text-gray-600">
-						{selectedDistrict === "Jaipur" && (
-							<>
-								<li>Amber Fort</li>
-								<li>Hawa Mahal</li>
-								<li>Jantar Mantar</li>
-							</>
-						)}
-						{selectedDistrict === "Jodhpur" && (
-							<>
-								<li>Mehrangarh Fort</li>
-								<li>Umaid Bhawan Palace</li>
-								<li>Clock Tower Market</li>
-							</>
-						)}
-						{selectedDistrict === "Udaipur" && (
-							<>
-								<li>City Palace</li>
-								<li>Lake Pichola</li>
-								<li>Jag Mandir</li>
-							</>
-						)}
-					</ul>
-				</div>
-			</div>
+			</main>
 		</div>
 	);
 };
