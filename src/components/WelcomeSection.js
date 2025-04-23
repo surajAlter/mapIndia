@@ -117,8 +117,8 @@ const WelcomeSection = () => {
 			</p>
 
 			{/* Responsive Scrollable Map */}
-			<div className="w-full overflow-x-auto rounded-3xl shadow-2xl bg-white p-4 md:p-6 hover:shadow-3xl transition-all duration-500">
-				<div className="inline-block min-w-[600px] max-w-[1000px] mx-auto">
+			<div className="w-full flex justify-center overflow-x-auto">
+				<div className="w-full max-w-6xl">
 					<IndiaMap id="india-svg" className="w-full h-auto" />
 				</div>
 			</div>
