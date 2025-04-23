@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as IndiaMap } from "../assets/Indian.svg"; // Make sure this path is correct
+import { ReactComponent as IndiaMap } from "../assets/pol/India_fixed.svg"; // Make sure this path is correct
 
 const idToSlugMap = {
   "IN-AN": "andaman-nicobar",

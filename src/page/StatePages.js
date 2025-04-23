@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as IndiaMap } from "../assets/Indian.svg";
+import { ReactComponent as IndiaMap } from "../assets/pol/India_fixed.svg";
 import Sidebar from "../components/Sidebar";
 
 const idToSlugMap = {
