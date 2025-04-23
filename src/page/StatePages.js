@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as IndiaMap } from "../assets/pol/India_fixed.svg";
+import { ReactComponent as IndiaMap } from "../assets/Indian.svg";
 import Sidebar from "../components/Sidebar";
 
 const idToSlugMap = {
@@ -143,8 +143,8 @@ const StatesPage = () => {
         </motion.h1>
 
         {/* Map Section */}
-        <div className="w-full overflow-x-auto rounded-2xl shadow-md bg-white p-4 md:p-6 mb-10">
-          <div className="inline-block min-w-[600px] max-w-[1000px] mx-auto">
+        <div className="w-full flex justify-center overflow-x-auto">
+          <div className="w-full max-w-6xl">
             <IndiaMap id="india-svg" className="w-full h-auto" />
           </div>
         </div>

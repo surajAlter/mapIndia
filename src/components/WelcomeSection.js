@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as IndiaMap } from "../assets/pol/India_fixed.svg"; // Make sure this path is correct
+import { ReactComponent as IndiaMap } from "../assets/Indian.svg"; // Make sure this path is correct
 
 const idToSlugMap = {
   "IN-AN": "andaman-nicobar",
@@ -111,11 +111,11 @@ const WelcomeSection = () => {
       </p>
 
       {/* Responsive Scrollable Map */}
-      <div className="w-full overflow-x-auto rounded-3xl shadow-2xl bg-white p-4 md:p-6 hover:shadow-3xl transition-all duration-500">
-        <div className="inline-block min-w-[100px] max-w-[1000px] mx-auto">
-          <IndiaMap id="india-svg" className="w-full h-auto" />
-        </div>
-      </div>
+      <div className="w-full flex justify-center overflow-x-auto">
+  <div className="w-full max-w-6xl">
+    <IndiaMap id="india-svg" className="w-full h-auto" />
+  </div>
+</div>
     </section>
   );
 };
